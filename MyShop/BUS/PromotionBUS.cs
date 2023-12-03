@@ -1,5 +1,6 @@
 ﻿using MyShop.DAO;
 using MyShop.DTO;
+using System.Collections.ObjectModel;
 
 namespace MyShop.BUS
 {
@@ -15,6 +16,11 @@ namespace MyShop.BUS
 		public PromotionDTO getPromotionById(int id)
 		{
 			return _PromotionDAO.getPromoById(id);
+		}
+
+		public ObservableCollection<PromotionDTO> getAll()
+		{
+			return _PromotionDAO.getAll();
 		}
 	}
 }

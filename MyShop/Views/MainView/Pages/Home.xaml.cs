@@ -50,43 +50,72 @@ namespace MyShop.Views.MainView.Pages
 
 
 		private List<ProductDTO>? _products = null;
-		private string _currentKey = "";
-		private int _currentPage = 1;
-		private int _rowsPerPage = 9;
+		public string _currentKey = "";
+		public int _currentPage = 1;
+		public int _rowsPerPage = 9;
 		private int _totalItems = 0;
 		private int _totalPages = 0;
-		private string? _currentSort = null;
-		private bool _currentOrder = true;
-		private Decimal? _currentStartPrice = null;
-		private Decimal? _currentEndPrice = null;
+		public int _currentSortIndex = 0;
+		public string? _currentSort = null;
+		public bool _currentOrder = true;
+		public int _currentPriceIndex = 0;
+		public Decimal? _currentStartPrice = null;
+		public Decimal? _currentEndPrice = null;
 		private Frame _pageNavigation;
 		private FileInfo _selectedFile;
 
-		//public Tuple<string, int, int, Decimal?, Decimal?> getCurrentState()
-		//{
-		//	return new Tuple<string, int, Decimal?, Decimal?>(
-		//		_currentKey,
-		//		_currentPage,
-		//		_currentStartPrice,
-		//		_currentEndPrice
-		//	);
-		//}
+		public Tuple<int, string, int, Decimal?, Decimal?, int, string?, bool> getCurrentState()
+		{
+			return new Tuple<int, string, int, Decimal?, Decimal?, int, string?, bool>(
+				_currentPage,
+				_currentKey,
+				_currentPriceIndex,
+				_currentStartPrice,
+				_currentEndPrice,
+				_currentSortIndex,
+				_currentSort,
+				_currentOrder
+			);
+		}
 
-		public Home(Frame pageNavigation, int page = 1, string keyword = "", 
-			Decimal? currentStartPrice = null, Decimal? currentEndPrice = null)
+		public Home(Frame pageNavigation, int page = 1, int rowsPerPage = 9, string keyword = "", int currentPriceIndex = 0,
+			Decimal? currentStartPrice = null, Decimal? currentEndPrice = null, int currentSortIndex = 0, 
+			string? currentSort = null, bool currentOrder = true)
 		{
 			_pageNavigation = pageNavigation;
 			InitializeComponent();
-	
-			_currentPage = page;
+			
+			if (keyword.Trim().Length != 0)
+			{
+				SearchTermTextBox.Text = keyword;
+			}
+
+			if (currentPriceIndex != 0)
+			{
+				PriceCombobox.SelectedIndex = currentPriceIndex;
+			}
+
+			if (currentSortIndex != 0)
+			{
+				SortCombobox.SelectedIndex = currentSortIndex;
+			}
+
+			_rowsPerPage = rowsPerPage;
 			_currentKey = keyword;
+
+			_currentPriceIndex = currentPriceIndex;
 			_currentStartPrice = currentStartPrice;
 			_currentEndPrice = currentEndPrice;
+
+			_currentSortIndex = currentSortIndex;
+			_currentSort = currentSort;
+			_currentOrder = currentOrder;
+			_currentPage = page;
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
+			updateDataSource();
 
 			this.DataContext = new Resources()
 			{
@@ -97,8 +126,7 @@ namespace MyShop.Views.MainView.Pages
 			};
 		}
 
-		private async void updateDataSource(int page = 1, string keyword = "",
-			Decimal? currentStartPrice = null, Decimal? currentEndPrice = null, string? currentSort = null, bool currentOrder = true)
+		private async void updateDataSource()
 		{
 			MessageText.Text = string.Empty;
 			List<Data> list = new List<Data>();
@@ -106,8 +134,15 @@ namespace MyShop.Views.MainView.Pages
 			CategoryBUS categoryBUS = new CategoryBUS();
 			PromotionBUS promotionBUS = new PromotionBUS();
 
-			(_products, _totalItems) = await productBUS.findProductBySearch(_currentPage, _rowsPerPage, keyword, 
-				currentStartPrice, currentEndPrice, currentSort, currentOrder);
+			try
+			{
+				(_products, _totalItems) = await productBUS.findProductBySearch(_currentPage, _rowsPerPage, _currentKey,
+						_currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			}
 			
 			foreach (var product in _products)
 			{
@@ -144,7 +179,8 @@ namespace MyShop.Views.MainView.Pages
 			{
 				string keyword = SearchTermTextBox.Text.Trim();
 				_currentKey = keyword;
-				updateDataSource(1, keyword, _currentStartPrice, _currentEndPrice);
+				_currentPage = 1;
+				updateDataSource();
 			}
 		}
 
@@ -153,7 +189,7 @@ namespace MyShop.Views.MainView.Pages
 			if (_currentPage > 1)
 			{
 				_currentPage--;
-				updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
+				updateDataSource();
 			}
 		}
 
@@ -162,114 +198,107 @@ namespace MyShop.Views.MainView.Pages
 			if (_currentPage < _totalPages)
 			{
 				_currentPage++;
-				updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
+				updateDataSource();
 			}
 		}
 
 		private void FirstButton_Click(object sender, RoutedEventArgs e)
 		{
 			_currentPage = 1;
-			updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
+			updateDataSource();
 		}
 
 		private void LastButton_Click(object sender, RoutedEventArgs e)
 		{
 			_currentPage = _totalPages;
-			updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
+			updateDataSource();
 		}
 
 		private void PriceCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (PriceCombobox.SelectedIndex >= 0)
+			if (PriceCombobox.SelectedIndex > 0)
 			{
 				_currentPage = 1;
 				// Giá dưới 5 triệu
 				if (PriceCombobox.SelectedIndex == 1)
 				{
+					_currentPriceIndex = 1;
 					_currentStartPrice = 0;
 					_currentEndPrice = 5000000;
-					updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
-					updatePagingInfo();
 				}
 				// Giá từ 5 triệu đến dưới 10 triệu
-				if (PriceCombobox.SelectedIndex == 2)
+				else if (PriceCombobox.SelectedIndex == 2)
 				{
+					_currentPriceIndex = 2;
 					_currentStartPrice = 5000000;
 					_currentEndPrice = 10000000;
-					updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
-					updatePagingInfo();
 				}
 				// Giá dưới 10 triệu đến dưới 15 triệu
-				if (PriceCombobox.SelectedIndex == 3)
+				else if (PriceCombobox.SelectedIndex == 3)
 				{
+					_currentPriceIndex = 3;
 					_currentStartPrice = 10000000;
 					_currentEndPrice = 15000000;
-					updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
-					updatePagingInfo();
 				}
 				// Giá từ 15 trở lên triệu
-				if (PriceCombobox.SelectedIndex == 4)
+				else if (PriceCombobox.SelectedIndex == 4)
 				{
+					_currentPriceIndex = 4;
 					_currentStartPrice = 15000000;
 					_currentEndPrice = Decimal.MaxValue;
-					updateDataSource(_currentPage, _currentKey, _currentStartPrice, _currentEndPrice);
-					updatePagingInfo();
 				}
 				// Tất cả giá
-				if (PriceCombobox.SelectedIndex == 5)
+				else if (PriceCombobox.SelectedIndex == 5)
 				{
+					_currentPriceIndex = 5;
 					_currentStartPrice = null;
 					_currentEndPrice = null;
-					updateDataSource(_currentPage, _currentKey, null, null);
-					updatePagingInfo();
 				}
+				updateDataSource();
+				updatePagingInfo();
 			}
 		}
 
 		private void SortCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (SortCombobox.SelectedIndex >= 0)
+			if (SortCombobox.SelectedIndex > 0)
 			{
 				// Giá tăng
 				if (SortCombobox.SelectedIndex == 1)
 				{
+					_currentSortIndex = 1;
 					_currentSort = "price";
 					_currentOrder = true;
-					updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
-					updatePagingInfo();
 				}
 				// Giá giảm
-				if (SortCombobox.SelectedIndex == 2)
+				else if (SortCombobox.SelectedIndex == 2)
 				{
+					_currentSortIndex = 2;
 					_currentSort = "price";
 					_currentOrder = false;
-					updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
-					updatePagingInfo();
 				}
 				// Tên tăng
-				if (SortCombobox.SelectedIndex == 3)
+				else if (SortCombobox.SelectedIndex == 3)
 				{
+					_currentSortIndex = 3;
 					_currentSort = "name";
 					_currentOrder = true;
-					updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
-					updatePagingInfo();
 				}
 				// Tên giảm
-				if (SortCombobox.SelectedIndex == 4)
+				else if (SortCombobox.SelectedIndex == 4)
 				{
+					_currentSortIndex = 4;
 					_currentSort = "name";
 					_currentOrder = false;
-					updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
-					updatePagingInfo();
 				}
 				// Không sắp xếp
-				if (SortCombobox.SelectedIndex == 5)
+				else if (SortCombobox.SelectedIndex == 5)
 				{
+					_currentSortIndex = 5;
 					_currentSort = null;
 					_currentOrder = true;
-					updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice, _currentSort, _currentOrder);
-					updatePagingInfo();
 				}
+				updateDataSource();
 			}
 		}
 
@@ -282,7 +311,7 @@ namespace MyShop.Views.MainView.Pages
 			var product = _products[i];
 			if (product != null)
 			{
-				//_pageNavigation.NavigationService.Navigate(new ProductDetail(this, product, _pageNavigation));
+				_pageNavigation.NavigationService.Navigate(new ProductDetail(this, product, _pageNavigation));
 			}
 		}
 
@@ -331,7 +360,8 @@ namespace MyShop.Views.MainView.Pages
 				_rowsPerPage = 9;
 			}
 
-			updateDataSource(1, _currentKey, _currentStartPrice, _currentEndPrice);
+			updateDataSource();
+
 			//updatePagingInfo();
 
 			flag = !flag;

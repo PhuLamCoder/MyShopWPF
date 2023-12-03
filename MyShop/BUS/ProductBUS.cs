@@ -72,5 +72,15 @@ namespace MyShop.BUS
 			var result = new Tuple<List<ProductDTO>, int>(items.ToList(), list.Count());
 			return result;
 		}
+
+		public void delProduct(int id)
+		{
+			_productDAO.deleteProductById(id);
+		}
+
+		public void updateProduct(ProductDTO product)
+		{
+			_productDAO.updateProduct(product);
+		}
 	}
 }
