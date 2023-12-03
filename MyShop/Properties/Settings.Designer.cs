@@ -50,9 +50,9 @@ namespace MyShop.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public string CurrentPage {
+        public int CurrentPage {
             get {
-                return ((string)(this["CurrentPage"]));
+                return ((int)(this["CurrentPage"]));
             }
             set {
                 this["CurrentPage"] = value;

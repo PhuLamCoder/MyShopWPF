@@ -191,8 +191,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\MainView\Pages\" />
-  </ItemGroup>
-
 </Project>
