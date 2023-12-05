@@ -17,5 +17,10 @@ namespace MyShop.BUS
 		{
 			return _categoryDAO.getCategoryById(id);
 		}
+
+		public ObservableCollection<CategoryDTO> getAll()
+		{
+			return _categoryDAO.getAll();
+		}
 	}
 }

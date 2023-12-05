@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 using MyShop.DTO;
+using System.Collections.ObjectModel;
 using System.Data;
 
 namespace MyShop.DAO
@@ -32,6 +33,28 @@ namespace MyShop.DAO
 
 			reader.Close();
 			return list[0];
+		}
+
+		public ObservableCollection<CategoryDTO> getAll()
+		{
+			ObservableCollection<CategoryDTO> list = new ObservableCollection<CategoryDTO>();
+
+			string sql = "SELECT * FROM category";
+			var command = new SqlCommand(sql, db.connection);
+			var reader = command.ExecuteReader();
+
+			while (reader.Read())
+			{
+				CategoryDTO category = new CategoryDTO();
+				category.CatID = (int)reader["CatID"];
+				category.CatName = reader["CatName"] == DBNull.Value ? "Lỗi tên thể loại" : (string)reader["CatName"];
+				category.CatIcon = (string)reader["CatIcon"];
+				category.CatDescription = (string)reader["CatDescription"];
+				list.Add(category);
+			}
+			reader.Close();
+
+			return list;
 		}
 	}
 }

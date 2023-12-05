@@ -30,9 +30,6 @@ namespace MyShop.Views.MainView.Pages
 			public string? CatIcon { get; set; }
 			public string? CatName { get; set; }
 			public decimal? PromotionPrice { get; set; }
-
-			//public int ProductItemWitdh { get; set; }
-			//public string ScaleValue { get; set; }
 			public int DiscountPercent { get; set; }
 
 			public Data(ProductDTO productDTO, CategoryDTO categoryDTO, int discountPercent)
@@ -42,8 +39,6 @@ namespace MyShop.Views.MainView.Pages
 				PromotionPrice = productDTO.PromotionPrice;
 				CatIcon = categoryDTO.CatIcon;
 				CatName = categoryDTO.CatName;
-				//ProductItemWitdh = 400;
-				//ScaleValue = "1";
 				DiscountPercent = discountPercent;
 			}
 		}
@@ -55,62 +50,17 @@ namespace MyShop.Views.MainView.Pages
 		public int _rowsPerPage = 9;
 		private int _totalItems = 0;
 		private int _totalPages = 0;
-		public int _currentSortIndex = 0;
 		public string? _currentSort = null;
 		public bool _currentOrder = true;
-		public int _currentPriceIndex = 0;
 		public Decimal? _currentStartPrice = null;
 		public Decimal? _currentEndPrice = null;
 		private Frame _pageNavigation;
 		private FileInfo _selectedFile;
 
-		public Tuple<int, string, int, Decimal?, Decimal?, int, string?, bool> getCurrentState()
-		{
-			return new Tuple<int, string, int, Decimal?, Decimal?, int, string?, bool>(
-				_currentPage,
-				_currentKey,
-				_currentPriceIndex,
-				_currentStartPrice,
-				_currentEndPrice,
-				_currentSortIndex,
-				_currentSort,
-				_currentOrder
-			);
-		}
-
-		public Home(Frame pageNavigation, int page = 1, int rowsPerPage = 9, string keyword = "", int currentPriceIndex = 0,
-			Decimal? currentStartPrice = null, Decimal? currentEndPrice = null, int currentSortIndex = 0, 
-			string? currentSort = null, bool currentOrder = true)
+		public Home(Frame pageNavigation)
 		{
 			_pageNavigation = pageNavigation;
 			InitializeComponent();
-			
-			if (keyword.Trim().Length != 0)
-			{
-				SearchTermTextBox.Text = keyword;
-			}
-
-			if (currentPriceIndex != 0)
-			{
-				PriceCombobox.SelectedIndex = currentPriceIndex;
-			}
-
-			if (currentSortIndex != 0)
-			{
-				SortCombobox.SelectedIndex = currentSortIndex;
-			}
-
-			_rowsPerPage = rowsPerPage;
-			_currentKey = keyword;
-
-			_currentPriceIndex = currentPriceIndex;
-			_currentStartPrice = currentStartPrice;
-			_currentEndPrice = currentEndPrice;
-
-			_currentSortIndex = currentSortIndex;
-			_currentSort = currentSort;
-			_currentOrder = currentOrder;
-			_currentPage = page;
 		}
 
 		private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -222,35 +172,30 @@ namespace MyShop.Views.MainView.Pages
 				// Giá dưới 5 triệu
 				if (PriceCombobox.SelectedIndex == 1)
 				{
-					_currentPriceIndex = 1;
 					_currentStartPrice = 0;
 					_currentEndPrice = 5000000;
 				}
 				// Giá từ 5 triệu đến dưới 10 triệu
 				else if (PriceCombobox.SelectedIndex == 2)
 				{
-					_currentPriceIndex = 2;
 					_currentStartPrice = 5000000;
 					_currentEndPrice = 10000000;
 				}
 				// Giá dưới 10 triệu đến dưới 15 triệu
 				else if (PriceCombobox.SelectedIndex == 3)
 				{
-					_currentPriceIndex = 3;
 					_currentStartPrice = 10000000;
 					_currentEndPrice = 15000000;
 				}
 				// Giá từ 15 trở lên triệu
 				else if (PriceCombobox.SelectedIndex == 4)
 				{
-					_currentPriceIndex = 4;
 					_currentStartPrice = 15000000;
 					_currentEndPrice = Decimal.MaxValue;
 				}
 				// Tất cả giá
 				else if (PriceCombobox.SelectedIndex == 5)
 				{
-					_currentPriceIndex = 5;
 					_currentStartPrice = null;
 					_currentEndPrice = null;
 				}
@@ -266,35 +211,30 @@ namespace MyShop.Views.MainView.Pages
 				// Giá tăng
 				if (SortCombobox.SelectedIndex == 1)
 				{
-					_currentSortIndex = 1;
 					_currentSort = "price";
 					_currentOrder = true;
 				}
 				// Giá giảm
 				else if (SortCombobox.SelectedIndex == 2)
 				{
-					_currentSortIndex = 2;
 					_currentSort = "price";
 					_currentOrder = false;
 				}
 				// Tên tăng
 				else if (SortCombobox.SelectedIndex == 3)
 				{
-					_currentSortIndex = 3;
 					_currentSort = "name";
 					_currentOrder = true;
 				}
 				// Tên giảm
 				else if (SortCombobox.SelectedIndex == 4)
 				{
-					_currentSortIndex = 4;
 					_currentSort = "name";
 					_currentOrder = false;
 				}
 				// Không sắp xếp
 				else if (SortCombobox.SelectedIndex == 5)
 				{
-					_currentSortIndex = 5;
 					_currentSort = null;
 					_currentOrder = true;
 				}
@@ -361,9 +301,7 @@ namespace MyShop.Views.MainView.Pages
 			}
 
 			updateDataSource();
-
 			//updatePagingInfo();
-
 			flag = !flag;
 		}
 	}

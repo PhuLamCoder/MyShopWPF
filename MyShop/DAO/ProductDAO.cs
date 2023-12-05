@@ -27,7 +27,6 @@ namespace MyShop.DAO
 				product.Rom = (int)reader["Rom"];
 				product.ScreenSize = (double)reader["ScreenSize"];
 				product.TinyDes = reader["TinyDes"] == DBNull.Value ? null : (string?)reader["TinyDes"];
-				product.FullDes = reader["FullDes"] == DBNull.Value ? null : (string?)reader["FullDes"];
 				product.Price = (decimal)reader["Price"];
 				product.ImagePath = reader["ImagePath"] == DBNull.Value ? "Assets/Images/sp/404.png" : (string?)reader["ImagePath"];
 				product.Trademark = reader["Trademark"] == DBNull.Value ? null : (string?)reader["Trademark"];
@@ -80,7 +79,6 @@ namespace MyShop.DAO
 					product.Rom = (int)reader["Rom"];
 					product.ScreenSize = (double)reader["ScreenSize"];
 					product.TinyDes = reader["TinyDes"] == DBNull.Value ? null : (string?)reader["TinyDes"];
-					product.FullDes = reader["FullDes"] == DBNull.Value ? null : (string?)reader["FullDes"];
 					product.Price = (decimal)reader["Price"];
 					product.ImagePath = reader["ImagePath"] == DBNull.Value ? null : (string?)reader["ImagePath"];
 					product.Trademark = reader["Trademark"] == DBNull.Value ? null : (string?)reader["Trademark"];
@@ -155,6 +153,17 @@ namespace MyShop.DAO
 			command.Parameters.Add("@PromoID", SqlDbType.Int).Value = productDTO.PromoID == null ? DBNull.Value : productDTO.PromoID;
 			command.Parameters.Add("@Block", SqlDbType.Int).Value = productDTO.Block;
 
+			command.ExecuteNonQuery();
+		}
+
+		public void updateImage(int id, string key)
+		{
+			string query = $"""
+                UPDATE product 
+                SET ImagePath = 'Assets/Images/sp/{key}.png'
+                WHERE ProID = {id}
+                """;
+			var command = new SqlCommand(query, db.connection);
 			command.ExecuteNonQuery();
 		}
 	}

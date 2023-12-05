@@ -1,6 +1,7 @@
 ﻿using MyShop.DAO;
 using MyShop.DTO;
 using System.Collections.ObjectModel;
+using System.IO;
 
 namespace MyShop.BUS
 {
@@ -81,6 +82,20 @@ namespace MyShop.BUS
 		public void updateProduct(ProductDTO product)
 		{
 			_productDAO.updateProduct(product);
+		}
+
+		public string uploadImage(FileInfo selectedImage, int id, string key)
+		{
+			_productDAO.updateImage(id, key);
+
+			var folder = AppDomain.CurrentDomain.BaseDirectory;
+
+			var filePath = $"{folder}/Assets/Images/sp/{key}.png";
+			var relativePath = $"Assets/Images/sp/{key}.png";
+
+			File.Copy(selectedImage.FullName, filePath);
+
+			return relativePath;
 		}
 	}
 }

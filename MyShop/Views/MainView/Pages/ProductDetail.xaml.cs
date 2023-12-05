@@ -93,9 +93,7 @@ namespace MyShop.Views.MainView.Pages
 		private void BackButton_Click(object sender, RoutedEventArgs e)
 		{
 			// Lưu lại trạng thái trước đó
-			_pageNavigation.NavigationService.Navigate(new Home(_pageNavigation,
-				_home._currentPage, _home._rowsPerPage, _home._currentKey, _home._currentPriceIndex, _home._currentStartPrice, 
-				_home._currentEndPrice, _home._currentSortIndex, _home._currentSort, _home._currentOrder));
+			_pageNavigation.NavigationService.GoBack();
 		}
 
 		private void DelProduct_Click(object sender, RoutedEventArgs e)
@@ -108,15 +106,14 @@ namespace MyShop.Views.MainView.Pages
 				// lưu lại trạng thái trước đó
 				_productBUS.delProduct(_product.ProId);
 
-				RoutedEventArgs eventArgs = new RoutedEventArgs(Button.ClickEvent);
-				BackButton.RaiseEvent(eventArgs);
+				_pageNavigation.NavigationService.GoBack();
 			}
 		}
 
 		private void UpdateButton_Click(object sender, RoutedEventArgs e)
 		{
 			var clonedProduct = (ProductDTO)_product.Clone();
-			//_pageNavigation.NavigationService.Navigate(new UpdateProduct(_product, _category, _pageNavigation));
+			_pageNavigation.NavigationService.Navigate(new UpdateProduct(_product, _category, _pageNavigation));
 		}
 
 		int flag = 0; // bỏ qua lần đầu

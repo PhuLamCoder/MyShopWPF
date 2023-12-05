@@ -15,7 +15,6 @@ namespace MyShop.DTO
 		public int Rom { get; set; }
 		public double ScreenSize { get; set; }
 		public string? TinyDes { get; set; }
-		public string? FullDes { get; set; }
 		public decimal Price { get; set; }
 		public decimal? PromotionPrice { get; set; }
 		public string? ImagePath { get; set; }
@@ -41,7 +40,6 @@ namespace MyShop.DTO
 			this.Rom = other.Rom;
 			this.ScreenSize = other.ScreenSize;
 			this.TinyDes = other.TinyDes;
-			this.FullDes = other.FullDes;
 			this.Price = other.Price;
 			this.PromotionPrice = other.PromotionPrice;
 			this.ImagePath = other.ImagePath;
