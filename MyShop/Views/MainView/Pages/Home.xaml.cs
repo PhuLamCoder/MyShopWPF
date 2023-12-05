@@ -257,7 +257,7 @@ namespace MyShop.Views.MainView.Pages
 
 		private void AddProduct_Click(object sender, RoutedEventArgs e)
 		{
-			//_pageNavigation.NavigationService.Navigate(new AddProduct(_pageNavigation));
+			_pageNavigation.NavigationService.Navigate(new AddProduct(_pageNavigation));
 		}
 
 		private void Sheet_Click(object sender, RoutedEventArgs e)

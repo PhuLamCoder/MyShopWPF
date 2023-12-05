@@ -97,5 +97,11 @@ namespace MyShop.BUS
 
 			return relativePath;
 		}
+
+		public int saveProduct(ProductDTO product)
+		{
+			int id = _productDAO.insertProduct(product);
+			return id;
+		}
 	}
 }

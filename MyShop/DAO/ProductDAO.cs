@@ -112,13 +112,7 @@ namespace MyShop.DAO
 
 		public void updateProduct(ProductDTO productDTO)
 		{
-			string sql = "update product " +
-				"set ProName =  @ProName, Ram = @Ram, Rom = @Rom, ScreenSize = @ScreenSize, TinyDes = @TinyDes," +
-				"Price = @Price, Trademark = @Trademark, BatteryCapacity = @BatteryCapacity," +
-				"CatID = @CatID, Quantity = @Quantity, PromoID = @PromoID, PromotionPrice = @PromotionPrice, Block = @Block " +
-				"where ProID = @ProID";
-
-			string a = """
+			string sql = """
 				UPDATE product
 				SET ProName =  @ProName, 
 					Ram = @Ram, 
@@ -165,6 +159,33 @@ namespace MyShop.DAO
                 """;
 			var command = new SqlCommand(query, db.connection);
 			command.ExecuteNonQuery();
+		}
+
+		public int insertProduct(ProductDTO productDTO)
+		{
+			string query = """
+				INSERT INTO product(ProName, Ram, Rom, ScreenSize, TinyDes, Price, PromotionPrice, Trademark, BatteryCapacity, CatID, Quantity, Block)
+				VALUES(@ProName, @Ram, @Rom, @ScreenSize, @TinyDes, @Price, @PromotionPrice, @Trademark, @BatteryCapacity, @CatID, @Quantity, @Block);
+				SELECT ident_current('product')
+				""";
+			var command = new SqlCommand(query, db.connection);
+
+			command.Parameters.Add("@ProName", SqlDbType.NVarChar).Value = productDTO.ProName;
+			command.Parameters.Add("@Ram", SqlDbType.Float).Value = productDTO.Ram;
+			command.Parameters.Add("@Rom", SqlDbType.Int).Value = productDTO.Rom;
+			command.Parameters.Add("@ScreenSize", SqlDbType.Float).Value = productDTO.ScreenSize;
+			command.Parameters.Add("@TinyDes", SqlDbType.NVarChar).Value = productDTO.TinyDes;
+			command.Parameters.Add("@Price", SqlDbType.Money).Value = productDTO.Price;
+			command.Parameters.Add("@PromotionPrice", SqlDbType.Money).Value = productDTO.PromotionPrice == null ? productDTO.Price : productDTO.PromotionPrice;
+			command.Parameters.Add("@Trademark", SqlDbType.Text).Value = productDTO.Trademark;
+			command.Parameters.Add("@BatteryCapacity", SqlDbType.Int).Value = productDTO.BatteryCapacity;
+			command.Parameters.Add("@CatID", SqlDbType.Int).Value = productDTO.CatID;
+			command.Parameters.Add("@Quantity", SqlDbType.Int).Value = productDTO.Quantity;
+			command.Parameters.Add("@Block", SqlDbType.Int).Value = productDTO.Block;
+
+			int id = (int)((decimal)command.ExecuteScalar());
+
+			return id;
 		}
 	}
 }
