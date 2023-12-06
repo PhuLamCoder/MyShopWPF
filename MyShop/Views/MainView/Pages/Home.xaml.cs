@@ -1,4 +1,5 @@
-﻿using MyShop.BUS;
+﻿using Microsoft.Win32;
+using MyShop.BUS;
 using MyShop.DTO;
 using System.IO;
 using System.Windows;
@@ -248,7 +249,7 @@ namespace MyShop.Views.MainView.Pages
 		{
 			int i = dataListView.SelectedIndex;
 
-			var product = _products[i];
+			var product = _products![i];
 			if (product != null)
 			{
 				_pageNavigation.NavigationService.Navigate(new ProductDetail(this, product, _pageNavigation));
@@ -262,30 +263,26 @@ namespace MyShop.Views.MainView.Pages
 
 		private void Sheet_Click(object sender, RoutedEventArgs e)
 		{
-			//string filename = "";
+			var screen = new OpenFileDialog();
+			screen.Filter = "Files|*.xlsx; *.csv;";
 
+			if (screen.ShowDialog() == true)
+			{
+				var sheetBUS = new SheetBUS();
+				var productBUS = new ProductBUS();
 
-			//var screen = new OpenFileDialog();
-			//screen.Filter = "Files|*.xlsx; *.csv;";
-			//if (screen.ShowDialog() == true)
-			//{
-			//	filename = screen.FileName;
+				var products = sheetBUS.ReadExcelFile(screen.FileName);
 
-			//	var sheetBUS = new SheetBUS();
-			//	var productBUS = new ProductBUS();
-
-			//	var products = sheetBUS.ReadExcelFile(filename);
-
-			//	foreach (var product in products)
-			//	{
-			//		productBUS.saveProduct(product);
-			//	}
-			//	MessageBox.Show("Đã thêm thành công", "Thông báo");
-			//}
-			//else
-			//{
-			//	MessageBox.Show("Đã có lỗi xảy ra!", "Thông báo");
-			//}
+				if (products != null && products.Count > 0)
+				{
+					foreach (var product in products)
+					{
+						productBUS.saveProduct(product);
+					}
+					updateDataSource();
+					MessageBox.Show("Đã thêm thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+				} 
+			}
 		}
 
 		bool flag = false;

@@ -26,7 +26,6 @@ namespace MyShop.BUS
 			return await _productDAO.getTop5Product();
 		}
 
-
 		public async Task<Tuple<List<ProductDTO>, int>> findProductBySearch(int currentPage = 1, int productsPerPage = 9,
 				string keyword = "", Decimal? startPrice = null, Decimal? endPrice = null, string? orderBy = null, bool asc = true)
 		{

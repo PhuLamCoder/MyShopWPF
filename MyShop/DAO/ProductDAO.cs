@@ -2,6 +2,7 @@
 using MyShop.DTO;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Windows;
 
 namespace MyShop.DAO
 {
@@ -65,7 +66,7 @@ namespace MyShop.DAO
 			ObservableCollection<ProductDTO> list = new ObservableCollection<ProductDTO>();
 			await Task.Run(() =>
 			{
-				string sql = "SELECT TOP 5 * FROM product WHERE Quantity <= 5 ORDER BY Quantity";
+				string sql = "SELECT * FROM product WHERE Quantity <= 5 ORDER BY Quantity";
 				var command = new SqlCommand(sql, db.connection);
 
 				var reader = command.ExecuteReader();
@@ -88,7 +89,6 @@ namespace MyShop.DAO
 					product.PromoID = reader["PromoID"] == DBNull.Value ? null : (int?)reader["PromoID"];
 					product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? (decimal)reader["Price"] : (decimal?)reader["PromotionPrice"];
 					product.Block = (int)reader["Block"];
-
 					list.Add(product);
 				}
 				reader.Close();

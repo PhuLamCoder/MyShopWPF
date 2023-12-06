@@ -115,10 +115,11 @@ namespace MyShop.Views.MainView
 			{
 				pageNavigation.NavigationService.Navigate(new Home(pageNavigation));
 			}
-			//if (selectedIndex == Category)
-			//{
-			//	pageNavigation.NavigationService.Navigate(new ModifyCategory(pageNavigation));
-			//}
+			if (selectedIndex == Category)
+			{
+				pageNavigation.NavigationService.Navigate(new ManageCategory(pageNavigation));
+			}
+
 			//if (selectedIndex == Promotion)
 			//{
 			//	pageNavigation.NavigationService.Navigate(new ModifyPromotion(pageNavigation));
