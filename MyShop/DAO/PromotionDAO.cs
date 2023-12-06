@@ -52,5 +52,43 @@ namespace MyShop.DAO
 
 			return list;
 		}
+
+		public int insertPromo(PromotionDTO category)
+		{
+			string query = """
+				INSERT INTO promotion(PromoCode, DiscountPercent)
+				VALUES (@PromoCode, @DiscountPercent);
+				SELECT ident_current('promotion')
+				""";
+			var command = new SqlCommand(query, db.connection);
+			command.Parameters.Add("@PromoCode", SqlDbType.NVarChar).Value = category.PromoCode;
+			command.Parameters.Add("@DiscountPercent", SqlDbType.Int).Value = category.DiscountPercent;
+
+			int id = (int)((decimal)command.ExecuteScalar());
+			return id;
+		}
+
+		public Tuple<Boolean, string> delPromoById(int idPromo)
+		{
+			string message = "";
+			bool isSuccess = true;
+
+			string sql = $"""
+                DELETE promotion 
+                WHERE IdPromo={idPromo}
+                """;
+			var command = new SqlCommand(sql, db.connection);
+			try
+			{
+				command.ExecuteNonQuery();
+			}
+			catch (SqlException ex)
+			{
+				message = ex.Message;
+				isSuccess = false;
+			}
+
+			return new Tuple<bool, string>(isSuccess, message);
+		}
 	}
 }

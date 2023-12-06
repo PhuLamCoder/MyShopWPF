@@ -22,5 +22,15 @@ namespace MyShop.BUS
 		{
 			return _PromotionDAO.getAll();
 		}
+
+		public int addPromotion(PromotionDTO promotion)
+		{
+			return _PromotionDAO.insertPromo(promotion);
+		}
+
+		public Tuple<Boolean, string> delPromotionById(int idPromo)
+		{
+			return _PromotionDAO.delPromoById(idPromo);
+		}
 	}
 }

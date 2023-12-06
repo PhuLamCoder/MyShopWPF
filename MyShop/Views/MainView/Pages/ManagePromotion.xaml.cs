@@ -20,6 +20,7 @@ namespace MyShop.Views.MainView.Pages
 			_pageNavigation = pageNavigation;
 			InitializeComponent();
 		}
+
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			int i = promotionListViews.SelectedIndex;
@@ -30,6 +31,7 @@ namespace MyShop.Views.MainView.Pages
 				//_pageNavigation.NavigationService.Navigate(new UpdatePromotion(_pageNavigation, promotion));
 			}
 		}
+
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			_promotionBUS = new PromotionBUS();
@@ -44,41 +46,67 @@ namespace MyShop.Views.MainView.Pages
 
 			if (i == -1)
 			{
-				MessageBox.Show("Vui lòng chọn mã khuyến mãi trước khi xóa", "Thông báo", MessageBoxButton.OK);
+				MessageBox.Show("Vui lòng chọn mã khuyến mãi trước khi xóa!", "Thông báo", 
+					MessageBoxButton.OK, MessageBoxImage.Warning);
 			}
 			else
 			{
-				MessageBoxResult choice = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông Báo", MessageBoxButton.OKCancel);
+				MessageBoxResult choice = MessageBox.Show("Bạn có chắc chắn muốn xóa không?", "Thông Báo", 
+					MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
 				if (choice == MessageBoxResult.OK)
 				{
 					bool isSuccess; string message;
 					var IdPromo = _promotion[i].IdPromo;
 
-					//(isSuccess, message) = _promotionBUS.delPromotionById((int)IdPromo);
-					//if (!isSuccess)
-					//{
-					//	MessageBox.Show(message, "Thông báo");
-					//}
-					//else
-					//{
-					//	_promotion.RemoveAt(i);
-					//}
-
+					(isSuccess, message) = _promotionBUS.delPromotionById((int)IdPromo!);
+					if (!isSuccess)
+					{
+						MessageBox.Show(message, "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+					}
+					else
+					{
+						_promotion.RemoveAt(i);
+					}
 				}
 			}
 		}
 
 		private void SavePromotion_Click(object sender, RoutedEventArgs e)
 		{
-			//var Apromotion = new PromotionDTO();
-			//Apromotion.PromoCode = NameCodeTextBox.Text;
-			//Apromotion.DiscountPercent = int.Parse(NameDiscountTextBox.Text);
-			//int id = _promotionBUS.addPromotion(Apromotion);
-			//Apromotion.IdPromo = id;
-			//_promotion.Add(Apromotion);
-
-			//MessageBox.Show("Thể loại đã thêm thành công", "Thông báo", MessageBoxButton.OK);
+			var Apromotion = new PromotionDTO();
+			if (NameCodeTextBox.Text.Trim() != "")
+			{
+				try
+				{
+					Apromotion.PromoCode = NameCodeTextBox.Text;
+					Apromotion.DiscountPercent = int.Parse(NameDiscountTextBox.Text);
+					if (Apromotion.DiscountPercent <= 0 || Apromotion.DiscountPercent >= 100)
+					{
+						MessageBox.Show("Giá trị giảm giá phải lớn hơn 0 và nhỏ hơn 100!", "Thông báo",
+							MessageBoxButton.OK, MessageBoxImage.Warning);
+					}
+					else
+					{
+						int id = _promotionBUS.addPromotion(Apromotion);
+						Apromotion.IdPromo = id;
+						_promotion.Add(Apromotion);
+						NameCodeTextBox.Text = "";
+						NameDiscountTextBox.Text = "";
+						MessageBox.Show("Thêm mã giảm giá thành công!", "Thông báo",
+							MessageBoxButton.OK, MessageBoxImage.Information);
+					}
+				}
+				catch (Exception)
+				{
+					MessageBox.Show("Giá trị giảm giá phải là số nguyên!", "Thông báo", 
+						MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
+			}
+			else
+			{
+				MessageBox.Show("Vui lòng nhập tên mã!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Warning);
+			}
 		}
 	}
 }
