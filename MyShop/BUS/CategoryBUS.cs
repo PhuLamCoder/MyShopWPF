@@ -22,5 +22,20 @@ namespace MyShop.BUS
 		{
 			return _categoryDAO.getAll();
 		}
+
+		public int addCategory(CategoryDTO category)
+		{
+			return _categoryDAO.insertCategory(category);
+		}
+
+		public Tuple<Boolean, string> delCategoryById(int catID)
+		{
+			return _categoryDAO.delCategoryById(catID);
+		}
+
+		public void updateCategory(CategoryDTO category)
+		{
+			_categoryDAO.updateCategory(category);
+		}
 	}
 }
