@@ -153,83 +153,78 @@
                   HorizontalContentAlignment="Center"
                   VerticalContentAlignment="Center"
                   BorderThickness="0"
-                  Margin="50, 0, 0, 0"
+                  Margin="20, 25, 0, 0"
                   Background="Transparent">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Name="ProductItem" Width="200" Margin="0, 0, 0, 0" Height="140">
+                    <Grid Name="ProductItem" Width="220" Height="110"
+                          VerticalAlignment="Center" Margin="0,4,0,4">
+                        
                         <Button Name="ItemButton"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                Width="155" Margin="10" Height="83"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Width="220" Height="110"
                                 BorderThickness="0.5" BorderBrush="Orange"
-                                Padding="12, 8, 8, 8" IsEnabled="False"
+                                Padding="0,8,8,8" IsEnabled="False"
                                 Style="{StaticResource MyButtonStyle}">
-                            <StackPanel VerticalAlignment="Center" Width="130" HorizontalAlignment="Left">
-                                <StackPanel Orientation="Horizontal">
-                                    <fa:ImageAwesome 
-                                        Name="CatIcon"
-                                        Width="11"
-                                        Height="11"
-                                        Margin="0, 0, 8, 0"
-                                        RenderOptions.BitmapScalingMode="HighQuality"
-                                        Icon="{Binding CatIcon}"
-                                        Foreground="#8B4000"/>
+                            
+                            <!--wrapper-->
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" 
+                                        Width="220" Height="130" HorizontalAlignment="Center">
+                                <Image Width="75" Height="110"
+                                       Cursor="Hand" Margin="8,0,0,0"
+                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                       Source="{Binding ProImage, Converter={StaticResource converter}}">
+                                </Image>
+                                
+                                <!--main info-->
+                                <StackPanel VerticalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock 
+                                            Text="Loại: "
+                                            TextWrapping="Wrap"
+                                            Foreground="#353935"
+                                            FontWeight="Bold"/>
+                                        <!-- binding -->
+                                        <TextBlock Name="CatName" Text="{Binding CatName}"/>
+                                    </StackPanel>
+
                                     <!-- binding -->
-                                    <TextBlock Name="CatName" Text="{Binding CatName}"/>
-                                </StackPanel>
-
-                                <!-- binding -->
-                                <TextBlock 
-                                    Name="ProName"
-                                    Text="{Binding ProName}"
-                                    TextWrapping="Wrap"
-                                    Margin="0, 2, 0, 2"
-                                    Foreground="#353935"
-                                    FontWeight="Bold"/>
-
-                                <!-- binding -->
-                                <StackPanel Orientation="Horizontal">
                                     <TextBlock 
-                                        Name="priceTextBlock"
-                                        Text="{Binding PromotionPrice, Converter={StaticResource currencyConverter}}"
-                                        FontWeight="Bold"
-                                        Foreground="#8B4000"/>
+                                        Name="ProName"
+                                        Text="{Binding ProName}"
+                                        TextWrapping="Wrap"
+                                        Margin="0,2,0,2"
+                                        Foreground="#353935"
+                                        FontWeight="Bold"/>
 
-                                    <Border HorizontalAlignment="Right"
-                                            Name="PromotionBorder"
-                                            Background="#30FF5733"
-                                            CornerRadius="5"
-                                            Margin="10, 0,0,0"
-                                            Height="15"
-                                            Width="36">
-                                        <TextBlock
-                                            Name ="PromotionTextBlock"
-                                            Foreground="DarkRed"
+                                    <!-- binding -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock 
+                                            Name="priceTextBlock"
+                                            Text="{Binding PromotionPrice, Converter={StaticResource currencyConverter}}"
                                             FontWeight="Bold"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Text="{Binding DiscountPercent, Converter={StaticResource promotionConverter}}"/>
-                                    </Border>
+                                            Foreground="#8B4000"/>
+
+                                        <Border HorizontalAlignment="Right"
+                                                Name="PromotionBorder"
+                                                Background="#30FF5733"
+                                                CornerRadius="5"
+                                                Margin="10, 0,0,0"
+                                                Height="15"
+                                                Width="36">
+                                            <TextBlock
+                                                Name ="PromotionTextBlock"
+                                                Foreground="DarkRed"
+                                                FontWeight="Bold"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding DiscountPercent, Converter={StaticResource promotionConverter}}"/>
+                                        </Border>
+                                    </StackPanel>
                                 </StackPanel>
                             </StackPanel>
                         </Button>
-
-                        <Image Width="75" Height="125" Margin="0, 0, 10, 0"
-                               Cursor="Hand"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Right"
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="{Binding ProImage, Converter={StaticResource converter}}">
-                            <Image.Effect>
-                                <DropShadowEffect 
-                                    BlurRadius="35"
-                                    ShadowDepth="5"
-                                    Opacity="0.4"
-                                    Direction="-90"
-                                    Color="#8B4000"/>
-                            </Image.Effect>
-                        </Image>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

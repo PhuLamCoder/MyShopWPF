@@ -75,9 +75,10 @@ namespace MyShop.DAO
 
 			string sql = $"""
                 DELETE promotion 
-                WHERE IdPromo={idPromo}
+                WHERE IdPromo = @IdPromo
                 """;
 			var command = new SqlCommand(sql, db.connection);
+			command.Parameters.Add("@IdPromo", SqlDbType.Int).Value = idPromo;
 			try
 			{
 				command.ExecuteNonQuery();
@@ -89,6 +90,23 @@ namespace MyShop.DAO
 			}
 
 			return new Tuple<bool, string>(isSuccess, message);
+		}
+
+		public void updatePromo(PromotionDTO category)
+		{
+			string query = """
+				UPDATE promotion
+				SET PromoCode = @PromoCode,
+					DiscountPercent = @DiscountPercent
+				WHERE IdPromo = @IdPromo
+				""";
+			var command = new SqlCommand(query, db.connection);
+
+			command.Parameters.Add("@PromoCode", SqlDbType.NVarChar).Value = category.PromoCode;
+			command.Parameters.Add("@DiscountPercent", SqlDbType.Int).Value = category.DiscountPercent;
+			command.Parameters.Add("@IdPromo", SqlDbType.Int).Value = category.IdPromo;
+
+			command.ExecuteNonQuery();
 		}
 	}
 }

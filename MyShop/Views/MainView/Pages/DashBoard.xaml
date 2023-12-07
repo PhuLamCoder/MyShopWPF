@@ -161,7 +161,8 @@
 
                     <TextBlock
                         Grid.Column="1"
-                        Text="Loại sản phẩm"
+                        Text="Hãng"
+                        Margin="10,0,0,0"
                         VerticalAlignment="Center"
                         FontSize="12"
                         FontWeight="Bold"
@@ -199,7 +200,7 @@
                                     Height="75"
                                     Cursor="Hand"
                                     VerticalAlignment="Center"
-                                    Margin="0, 0, 10, 0"
+                                    Margin="0,0,10,0"
                                     HorizontalAlignment="Center"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Source="{Binding ImagePath, Converter={StaticResource converter}}">
@@ -207,7 +208,7 @@
 
                                 <TextBlock
                                     Grid.Column="1"
-                                    Margin="0, 0, 0, 0"
+                                    Margin="0,0,0,0"
                                     Text="{Binding ProName}"
                                     FontWeight="Medium"
                                     Foreground="#353935"
@@ -216,7 +217,7 @@
 
                                 <TextBlock
                                     Grid.Column="2"
-                                    Margin="0, 0, 0, 0"
+                                    Margin="0,0,0,0"
                                     Text="{Binding Trademark}"
                                     FontWeight="Medium"
                                     Foreground="#353935"

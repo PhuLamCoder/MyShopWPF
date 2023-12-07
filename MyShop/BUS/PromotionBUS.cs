@@ -32,5 +32,10 @@ namespace MyShop.BUS
 		{
 			return _PromotionDAO.delPromoById(idPromo);
 		}
+
+		public void updatePromotion(PromotionDTO promotion)
+		{
+			_PromotionDAO.updatePromo(promotion);
+		}
 	}
 }

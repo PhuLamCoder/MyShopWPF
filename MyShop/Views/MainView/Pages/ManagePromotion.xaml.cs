@@ -28,7 +28,7 @@ namespace MyShop.Views.MainView.Pages
 			PromotionDTO promotion = _promotion[i];
 			if (promotion != null)
 			{
-				//_pageNavigation.NavigationService.Navigate(new UpdatePromotion(_pageNavigation, promotion));
+				_pageNavigation.NavigationService.Navigate(new UpdatePromotion(_pageNavigation, promotion));
 			}
 		}
 
