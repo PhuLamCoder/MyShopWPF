@@ -93,7 +93,7 @@ namespace MyShop.Views.MainView.Pages
 				_productDTO.Ram = Double.Parse(RamTermTextBox.Text);
 				_productDTO.Rom = int.Parse(RomTermTextBox.Text);
 				_productDTO.ScreenSize = Double.Parse(ScreenSizeTermTextBox.Text);
-				_productDTO.TinyDes = DesTermTextBox.Text;
+				_productDTO.Description = DesTermTextBox.Text;
 				_productDTO.Price = Decimal.Parse(PriceTermTextBox.Text);
 				_productDTO.PromotionPrice = (decimal?)((double)_productDTO.Price * percent);
 				_productDTO.Trademark = TradeMarkTermTextBox.Text;
@@ -104,7 +104,6 @@ namespace MyShop.Views.MainView.Pages
 				var categoryTemp = _categoryBUS.getCategoryById(_productDTO.CatID);
 				_categoryDTO.CatID = categoryTemp.CatID;
 				_categoryDTO.CatName = categoryTemp.CatName;
-				_categoryDTO.CatIcon = categoryTemp.CatIcon;
 
 				_productDTO.Quantity = int.Parse(QuantityTermTextBox.Text);
 				_productDTO.Block = 0;

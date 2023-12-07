@@ -25,8 +25,6 @@ namespace MyShop.DAO
 
 				category.CatID = (int)reader["CatID"];
 				category.CatName = reader["CatName"] == DBNull.Value ? "Lỗi tên thể loại" : (string)reader["CatName"];
-				//category.CatIcon = (string)reader["CatIcon"];
-				category.CatIcon = "Android";
 				category.CatDescription = (string)reader["CatDescription"];
 
 				list.Add(category);
@@ -49,8 +47,6 @@ namespace MyShop.DAO
 				CategoryDTO category = new CategoryDTO();
 				category.CatID = (int)reader["CatID"];
 				category.CatName = reader["CatName"] == DBNull.Value ? "Lỗi tên thể loại" : (string)reader["CatName"];
-				//category.CatIcon = (string)reader["CatIcon"];
-				category.CatIcon = "Android";
 				category.CatDescription = (string)reader["CatDescription"];
 				list.Add(category);
 			}

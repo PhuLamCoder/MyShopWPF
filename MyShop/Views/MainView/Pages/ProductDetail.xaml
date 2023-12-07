@@ -104,7 +104,7 @@
                                     Height="14"
                                     Margin="0, 0, 8, 0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
-                                    Icon="{Binding Category.CatIcon}"
+                                    Icon="Flag"
                                     Foreground="#8B4000"/>
 
                                 <!-- binding -->
@@ -304,7 +304,7 @@
 
                     <TextBlock Text="MÔ TẢ" Foreground="#353935" FontSize="16"
                                FontWeight="Bold" Grid.ColumnSpan="2"/>
-                    <TextBlock Grid.Row="1" Text="{Binding Product.TinyDes}"
+                    <TextBlock Grid.Row="1" Text="{Binding Product.Description}"
                                TextWrapping="Wrap" Grid.ColumnSpan="2"/>
                 </Grid>
 

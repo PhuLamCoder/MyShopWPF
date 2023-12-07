@@ -27,7 +27,7 @@ namespace MyShop.DAO
 				product.Ram = (double)reader["Ram"];
 				product.Rom = (int)reader["Rom"];
 				product.ScreenSize = (double)reader["ScreenSize"];
-				product.TinyDes = reader["TinyDes"] == DBNull.Value ? null : (string?)reader["TinyDes"];
+				product.Description = reader["Description"] == DBNull.Value ? null : (string?)reader["Description"];
 				product.Price = (decimal)reader["Price"];
 				product.ImagePath = reader["ImagePath"] == DBNull.Value ? "Assets/Images/sp/404.png" : (string?)reader["ImagePath"];
 				product.Trademark = reader["Trademark"] == DBNull.Value ? null : (string?)reader["Trademark"];
@@ -79,7 +79,7 @@ namespace MyShop.DAO
 					product.Ram = (double)reader["Ram"];
 					product.Rom = (int)reader["Rom"];
 					product.ScreenSize = (double)reader["ScreenSize"];
-					product.TinyDes = reader["TinyDes"] == DBNull.Value ? null : (string?)reader["TinyDes"];
+					product.Description = reader["Description"] == DBNull.Value ? null : (string?)reader["Description"];
 					product.Price = (decimal)reader["Price"];
 					product.ImagePath = reader["ImagePath"] == DBNull.Value ? null : (string?)reader["ImagePath"];
 					product.Trademark = reader["Trademark"] == DBNull.Value ? null : (string?)reader["Trademark"];
@@ -118,7 +118,7 @@ namespace MyShop.DAO
 					Ram = @Ram, 
 					Rom = @Rom, 
 					ScreenSize = @ScreenSize, 
-					TinyDes = @TinyDes,
+					Description = @Description,
 					Price = @Price, 
 					Trademark = @Trademark, 
 					BatteryCapacity = @BatteryCapacity,
@@ -137,7 +137,7 @@ namespace MyShop.DAO
 			command.Parameters.Add("@Ram", SqlDbType.Float).Value = productDTO.Ram;
 			command.Parameters.Add("@Rom", SqlDbType.Int).Value = productDTO.Rom;
 			command.Parameters.Add("@ScreenSize", SqlDbType.Float).Value = productDTO.ScreenSize;
-			command.Parameters.Add("@TinyDes", SqlDbType.NVarChar).Value = productDTO.TinyDes;
+			command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = productDTO.Description;
 			command.Parameters.Add("@Price", SqlDbType.Money).Value = productDTO.Price;
 			command.Parameters.Add("@Trademark", SqlDbType.Text).Value = productDTO.Trademark;
 			command.Parameters.Add("@BatteryCapacity", SqlDbType.Int).Value = productDTO.BatteryCapacity;
@@ -164,8 +164,8 @@ namespace MyShop.DAO
 		public int insertProduct(ProductDTO productDTO)
 		{
 			string query = """
-				INSERT INTO product(ProName, Ram, Rom, ScreenSize, TinyDes, Price, PromotionPrice, Trademark, BatteryCapacity, CatID, Quantity, Block)
-				VALUES(@ProName, @Ram, @Rom, @ScreenSize, @TinyDes, @Price, @PromotionPrice, @Trademark, @BatteryCapacity, @CatID, @Quantity, @Block);
+				INSERT INTO product(ProName, Ram, Rom, ScreenSize, Description, Price, PromotionPrice, Trademark, BatteryCapacity, CatID, Quantity, Block)
+				VALUES(@ProName, @Ram, @Rom, @ScreenSize, @Description, @Price, @PromotionPrice, @Trademark, @BatteryCapacity, @CatID, @Quantity, @Block);
 				SELECT ident_current('product')
 				""";
 			var command = new SqlCommand(query, db.connection);
@@ -174,7 +174,7 @@ namespace MyShop.DAO
 			command.Parameters.Add("@Ram", SqlDbType.Float).Value = productDTO.Ram;
 			command.Parameters.Add("@Rom", SqlDbType.Int).Value = productDTO.Rom;
 			command.Parameters.Add("@ScreenSize", SqlDbType.Float).Value = productDTO.ScreenSize;
-			command.Parameters.Add("@TinyDes", SqlDbType.NVarChar).Value = productDTO.TinyDes;
+			command.Parameters.Add("@Description", SqlDbType.NVarChar).Value = productDTO.Description;
 			command.Parameters.Add("@Price", SqlDbType.Money).Value = productDTO.Price;
 			command.Parameters.Add("@PromotionPrice", SqlDbType.Money).Value = productDTO.PromotionPrice == null ? productDTO.Price : productDTO.PromotionPrice;
 			command.Parameters.Add("@Trademark", SqlDbType.Text).Value = productDTO.Trademark;

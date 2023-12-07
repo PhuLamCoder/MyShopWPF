@@ -33,7 +33,7 @@ namespace MyShop.DAO
 
 			// Test
 			_server = "NONAME";
-			_databaseName = "MyShop";
+			_databaseName = "MyShopDB";
 			_user = "sa";
 			_password = "200303";
 
@@ -52,7 +52,6 @@ namespace MyShop.DAO
 			{
 				_connection.Open();
 				isSelectedDatabase = true;
-
 			}
 			catch (Exception ex)
 			{

@@ -184,7 +184,7 @@
                                      VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
                                      FontSize="13" Height="160"
                                      TextAlignment="Left" TextWrapping="Wrap" Width="270"
-                                     Text="{Binding TinyDes}" x:Name="DesTermTextBox" Margin="0,8,0,2"/>
+                                     Text="{Binding Desc}" x:Name="DesTermTextBox" Margin="0,8,0,2"/>
                             <TextBlock IsHitTestVisible="False" Text="Nhập mô tả sản phẩm" 
                                        VerticalAlignment="Top" HorizontalAlignment="Left"
                                        FontSize="13" Margin="3,9,0,0" Foreground="DarkGray">

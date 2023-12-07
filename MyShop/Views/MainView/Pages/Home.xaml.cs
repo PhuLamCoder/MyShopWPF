@@ -28,7 +28,6 @@ namespace MyShop.Views.MainView.Pages
 		{
 			public string? ProName { get; set; }
 			public string? ProImage { get; set; }
-			public string? CatIcon { get; set; }
 			public string? CatName { get; set; }
 			public decimal? PromotionPrice { get; set; }
 			public int DiscountPercent { get; set; }
@@ -38,7 +37,6 @@ namespace MyShop.Views.MainView.Pages
 				ProName = productDTO.ProName;
 				ProImage = productDTO.ImagePath;
 				PromotionPrice = productDTO.PromotionPrice;
-				CatIcon = categoryDTO.CatIcon;
 				CatName = categoryDTO.CatName;
 				DiscountPercent = discountPercent;
 			}

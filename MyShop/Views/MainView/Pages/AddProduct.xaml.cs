@@ -76,7 +76,7 @@ namespace MyShop.Views.MainView.Pages
 			productDTO.Ram = Double.Parse(RamTermTextBox.Text);
 			productDTO.Rom = int.Parse(RomTermTextBox.Text);
 			productDTO.ScreenSize = Double.Parse(ScreenSizeTermTextBox.Text);
-			productDTO.TinyDes = DesTermTextBox.Text;
+			productDTO.Description = DesTermTextBox.Text;
 			productDTO.Price = Decimal.Parse(PriceTermTextBox.Text);
 			productDTO.Trademark = TradeMarkTermTextBox.Text;
 			productDTO.BatteryCapacity = int.Parse(PinTermTextBox.Text);

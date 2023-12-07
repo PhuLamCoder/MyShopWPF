@@ -14,7 +14,7 @@ namespace MyShop.BUS
 			Ram,
 			Rom,
 			ScreenSize,
-			TinyDes,
+			Desc,
 			Price,
 			Trademark,
 			BatteryCapacity,
@@ -97,9 +97,9 @@ namespace MyShop.BUS
 							{
 								productDTO.ScreenSize = double.Parse(cellValue);
 							}
-							else if (columnIndex == (int)Product.TinyDes)
+							else if (columnIndex == (int)Product.Desc)
 							{
-								productDTO.TinyDes = cellValue;
+								productDTO.Description = cellValue;
 							}
 							else if (columnIndex == (int)Product.Price)
 							{
