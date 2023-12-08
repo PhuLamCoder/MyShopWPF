@@ -34,7 +34,7 @@ namespace MyShop.DAO
 				product.BatteryCapacity = (int)reader["BatteryCapacity"];
 				product.CatID = (int)reader["CatID"];
 				product.Quantity = (int)reader["Quantity"];
-				product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? product.Price : (decimal?)reader["PromotionPrice"];
+				product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? product.Price : (decimal)reader["PromotionPrice"];
 				product.PromoID = reader["PromoID"] == DBNull.Value ? null : (int?)reader["PromoID"];
 				product.Block = (int)reader["Block"];
 				list.Add(product);
@@ -87,7 +87,7 @@ namespace MyShop.DAO
 					product.CatID = (int)reader["CatID"];
 					product.Quantity = (int)reader["Quantity"];
 					product.PromoID = reader["PromoID"] == DBNull.Value ? null : (int?)reader["PromoID"];
-					product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? (decimal)reader["Price"] : (decimal?)reader["PromotionPrice"];
+					product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? (decimal)reader["Price"] : (decimal)reader["PromotionPrice"];
 					product.Block = (int)reader["Block"];
 					list.Add(product);
 				}
@@ -186,6 +186,45 @@ namespace MyShop.DAO
 			int id = (int)((decimal)command.ExecuteScalar());
 
 			return id;
+		}
+
+		public ProductDTO getProductById(int id)
+		{
+			List<ProductDTO> list = new List<ProductDTO>();
+			ProductDTO result = new ProductDTO();
+
+			string query = """
+				SELECT * FROM product WHERE ProID = @id
+				""";
+
+			var command = new SqlCommand(query, db.connection);
+			command.Parameters.Add("@id", SqlDbType.Int).Value = id;
+
+			var reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				ProductDTO product = new ProductDTO();
+				product.ProId = (int)reader["ProID"];
+				product.ProName = reader["ProName"] == DBNull.Value ? "Lỗi tên sản phẩm" : (string?)reader["ProName"];
+				product.Ram = (double)reader["Ram"];
+				product.Rom = (int)reader["Rom"];
+				product.ScreenSize = (double)reader["ScreenSize"];
+				product.Description = reader["Description"] == DBNull.Value ? null : (string?)reader["Description"];
+				product.Price = (decimal)reader["Price"];
+				product.ImagePath = reader["ImagePath"] == DBNull.Value ? null : (string?)reader["ImagePath"];
+				product.Trademark = reader["Trademark"] == DBNull.Value ? null : (string?)reader["Trademark"];
+				product.BatteryCapacity = (int)reader["BatteryCapacity"];
+				product.CatID = (int)reader["CatID"];
+				product.PromoID = reader["PromoID"] == DBNull.Value ? null : (int?)reader["PromoID"];
+				product.PromotionPrice = reader["PromotionPrice"] == DBNull.Value ? (decimal)reader["Price"] : (decimal)reader["PromotionPrice"];
+				product.Quantity = (int)reader["Quantity"];
+
+				list.Add(product);
+			}
+			reader.Close();
+			result = list[0];
+
+			return result;
 		}
 	}
 }

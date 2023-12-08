@@ -1,4 +1,5 @@
-﻿using MyShop.DAO;
+﻿using DocumentFormat.OpenXml.VariantTypes;
+using MyShop.DAO;
 using MyShop.DTO;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -12,6 +13,19 @@ namespace MyShop.BUS
 		public ProductBUS()
 		{
 			_productDAO = new ProductDAO();
+		}
+
+		public async Task<ObservableCollection<ProductDTO>> getAll(string? sortBy = null) 
+		{
+			var result = await _productDAO.getAll();
+			if (sortBy != null)
+			{
+				if (sortBy.ToLower() == "name")
+				{
+					result = new ObservableCollection<ProductDTO>(result.OrderBy(product => product.ProName).ToList());
+				}
+			}
+			return result;
 		}
 
 
@@ -59,7 +73,7 @@ namespace MyShop.BUS
 			// TODO: nên handle việc ProName bị null ở đây .
 			// 
 			var list = sortedList.Where((item) => {
-				bool checkName = item.ProName.ToLower().Contains(keyword.ToLower());
+				bool checkName = item.ProName!.ToLower().Contains(keyword.ToLower());
 
 				if (startPrice == null || endPrice == null) return checkName;
 
@@ -101,6 +115,11 @@ namespace MyShop.BUS
 		{
 			int id = _productDAO.insertProduct(product);
 			return id;
+		}
+
+		public ProductDTO findProductById(int id)
+		{
+			return _productDAO.getProductById(id);
 		}
 	}
 }

@@ -95,7 +95,7 @@ namespace MyShop.Views.MainView.Pages
 				_productDTO.ScreenSize = Double.Parse(ScreenSizeTermTextBox.Text);
 				_productDTO.Description = DesTermTextBox.Text;
 				_productDTO.Price = Decimal.Parse(PriceTermTextBox.Text);
-				_productDTO.PromotionPrice = (decimal?)((double)_productDTO.Price * percent);
+				_productDTO.PromotionPrice = (decimal)((double)_productDTO.Price * percent);
 				_productDTO.Trademark = TradeMarkTermTextBox.Text;
 				_productDTO.BatteryCapacity = int.Parse(PinTermTextBox.Text);
 				_productDTO.CatID = categoryDTO.CatID;

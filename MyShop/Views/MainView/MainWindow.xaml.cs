@@ -123,10 +123,10 @@ namespace MyShop.Views.MainView
 			{
 				pageNavigation.NavigationService.Navigate(new ManagePromotion(pageNavigation));
 			}
-			//if (selectedIndex == Order)
-			//{
-			//	pageNavigation.NavigationService.Navigate(new OrderDetail(pageNavigation));
-			//}
+			else if (selectedIndex == Order)
+			{
+				pageNavigation.NavigationService.Navigate(new ManageOrder(pageNavigation));
+			}
 			//if (selectedIndex == Statistical)
 			//{
 			//	pageNavigation.NavigationService.Navigate(new Statistical(pageNavigation));

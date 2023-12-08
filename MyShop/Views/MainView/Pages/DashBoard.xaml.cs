@@ -19,12 +19,12 @@ namespace MyShop.Views.MainView.Pages
 	public partial class DashBoard : Page
 	{
 		ProductBUS _productBUS;
-		OrderBUS _orderBUS;
+		ShopOrderBUS _orderBUS;
 
 		public DashBoard()
 		{
 			_productBUS = new ProductBUS();
-			_orderBUS = new OrderBUS();
+			_orderBUS = new ShopOrderBUS();
 			InitializeComponent();
 		}
 
@@ -32,7 +32,7 @@ namespace MyShop.Views.MainView.Pages
 		{
 			int totalProduct = await _productBUS.countTotalProduct();
 
-			int totalOrder = await _orderBUS.countTotalOrderbyLastWeek();
+			int totalOrder = _orderBUS.countTotalOrderbyLastWeek();
 
 			var top5Product = await _productBUS.getTop5Product();
 

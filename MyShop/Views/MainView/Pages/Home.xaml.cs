@@ -44,17 +44,16 @@ namespace MyShop.Views.MainView.Pages
 
 
 		private List<ProductDTO>? _products = null;
-		public string _currentKey = "";
-		public int _currentPage = 1;
-		public int _rowsPerPage = 9;
+		private string _currentKey = "";
+		private int _currentPage = 1;
+		private int _rowsPerPage = 9;
 		private int _totalItems = 0;
 		private int _totalPages = 0;
-		public string? _currentSort = null;
-		public bool _currentOrder = true;
-		public Decimal? _currentStartPrice = null;
-		public Decimal? _currentEndPrice = null;
+		private string? _currentSort = null;
+		private bool _currentOrder = true;
+		private Decimal? _currentStartPrice = null;
+		private Decimal? _currentEndPrice = null;
 		private Frame _pageNavigation;
-		private FileInfo _selectedFile;
 
 		public Home(Frame pageNavigation)
 		{

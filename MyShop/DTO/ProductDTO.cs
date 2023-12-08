@@ -16,7 +16,7 @@ namespace MyShop.DTO
 		public double ScreenSize { get; set; }
 		public string? Description { get; set; }
 		public decimal Price { get; set; }
-		public decimal? PromotionPrice { get; set; }
+		public decimal PromotionPrice { get; set; }
 		public string? ImagePath { get; set; }
 		public string? Trademark { get; set; }
 		public int BatteryCapacity { get; set; }

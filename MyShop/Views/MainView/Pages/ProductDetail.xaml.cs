@@ -126,7 +126,7 @@ namespace MyShop.Views.MainView.Pages
 				_currentData.Promotion.copy(promotion);
 				_product.PromoID = _currentData.Promotion.IdPromo;
 				double percent = 1 - promotion.DiscountPercent * 1.0 / 100;
-				_product.PromotionPrice = (decimal?)((double)_product.Price * percent);
+				_product.PromotionPrice = (decimal)((double)_product.Price * percent);
 				_productBUS.updateProduct(_product);
 				_promotion = promotion;
 				MessageBox.Show("Đã áp dụng mã khuyến mãi thành công!", "Thông Báo", MessageBoxButton.OK, MessageBoxImage.Information);
