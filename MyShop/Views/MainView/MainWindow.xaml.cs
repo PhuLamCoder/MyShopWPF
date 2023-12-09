@@ -127,10 +127,11 @@ namespace MyShop.Views.MainView
 			{
 				pageNavigation.NavigationService.Navigate(new ManageOrder(pageNavigation));
 			}
-			//if (selectedIndex == Statistical)
-			//{
-			//	pageNavigation.NavigationService.Navigate(new Statistical(pageNavigation));
-			//}
+			else if (selectedIndex == Statistical)
+			{
+				pageNavigation.NavigationService.Navigate(new RevenueReport(pageNavigation));
+			}
+
 			// reset border trước khi click
 			resetBorder();
 
