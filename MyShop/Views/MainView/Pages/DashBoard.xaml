@@ -162,7 +162,7 @@
                     <TextBlock
                         Grid.Column="1"
                         Text="Hãng"
-                        Margin="10,0,0,0"
+                        Margin="2,0,0,0"
                         VerticalAlignment="Center"
                         FontSize="12"
                         FontWeight="Bold"
@@ -177,20 +177,17 @@
                         Foreground="#353935"/>
                 </Grid>
                 
-                <ListView 
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Name="productsListView"
-                    BorderThickness="0"
-                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                    Background="Transparent">
+                <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                          Name="productsListView"
+                          BorderThickness="0"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="800" Height="35">
+                            <Grid Width="720" Height="35">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.18*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1.2*"/>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="0.4*"/>
                                 </Grid.ColumnDefinitions>
@@ -226,11 +223,11 @@
 
                                 <TextBlock
                                     Grid.Column="3"
-                                    Margin="30, 0, 0, 0"
+                                    Margin="0,0,6,0"
                                     Text="{Binding Quantity}"
                                     TextWrapping="Wrap"
                                     FontWeight="Medium"
-                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Right" VerticalAlignment="Center"
                                     Foreground="#353935"/>
                             </Grid>
                         </DataTemplate>

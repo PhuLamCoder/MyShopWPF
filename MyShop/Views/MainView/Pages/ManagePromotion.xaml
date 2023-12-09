@@ -17,7 +17,7 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Mã khuyến mãi"
-                   Margin="30,0,0,0"
+                   Margin="30,0,0,-10"
                    Foreground="#8B4000"
                    VerticalAlignment="Center"
                    FontSize="25"

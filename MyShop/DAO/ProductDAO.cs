@@ -66,7 +66,7 @@ namespace MyShop.DAO
 			ObservableCollection<ProductDTO> list = new ObservableCollection<ProductDTO>();
 			await Task.Run(() =>
 			{
-				string sql = "SELECT * FROM product WHERE Quantity <= 5 ORDER BY Quantity";
+				string sql = "SELECT TOP 5 * FROM product WHERE Quantity <= 5 ORDER BY Quantity";
 				var command = new SqlCommand(sql, db.connection);
 
 				var reader = command.ExecuteReader();

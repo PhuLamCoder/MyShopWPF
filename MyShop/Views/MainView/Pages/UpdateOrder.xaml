@@ -1,4 +1,4 @@
-﻿<Page x:Class="MyShop.Views.MainView.Pages.AddOrder"
+﻿<Page x:Class="MyShop.Views.MainView.Pages.UpdateOrder"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,13 +7,12 @@
       xmlns:local="clr-namespace:MyShop.Views.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="AddOrder" Loaded="Page_Loaded">
+      Title="UpdateOrder" Loaded="Page_Loaded">
 
     <Page.Resources>
         <local:RelativeToAbsoluteConverter x:Key="absoluteConverter"/>
         <local:DecimalToCurrencyConverter x:Key="currencyConverter"/>
     </Page.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
@@ -68,7 +67,7 @@
                 <!--Hiển thị nhập sản phẩm-->
                 <StackPanel Grid.Column="0" Margin="0,5,0,5" Orientation="Vertical">
                     <TextBlock Margin="10,0,0,0" 
-                           Text="CHỌN SẢN PHẨM"
+                           Text="THÊM SẢN PHẨM ĐƯỢC MUA"
                            FontSize="14"
                            FontWeight="Medium"
                            Foreground="#353935"/>
@@ -79,7 +78,8 @@
                             Background="WhiteSmoke">
                         <ComboBox SelectionChanged="ProductCombobox_SelectionChanged"
                                   Name="ProductCombobox"
-                                  BorderThickness="0" BorderBrush="Transparent" Width="240"
+                                  Width="240"
+                                  BorderThickness="0" BorderBrush="Transparent" 
                                   VerticalContentAlignment="Center">
                             <ComboBox.ItemContainerStyle>
                                 <Style TargetType="ComboBoxItem">
@@ -103,16 +103,17 @@
                             Grid.Column="0" Background="White"
                             Height="30" Width="100" Margin="0,28,0,10">
                         <Grid Width="100" Margin="0" HorizontalAlignment="Center">
-                            <TextBox x:Name="QuantityTermTextBox"
-                                BorderThickness="0"
+                            <TextBox BorderThickness="0"
                                 VerticalContentAlignment="Center"
                                 FontSize="13"
-                                Width="90"/>
+                                Width="90"
+                                x:Name="QuantityTermTextBox"/>
+                            
                             <TextBlock IsHitTestVisible="False" Text="Số lượng" 
-                                       VerticalAlignment="Center"
-                                       FontSize="13"
-                                       HorizontalAlignment="Left" Margin="8,0,0,0"
-                                       Foreground="DarkGray">
+                                VerticalAlignment="Center" HorizontalAlignment="Left"
+                                FontSize="13"
+                                Margin="8,0,0,0"
+                                Foreground="DarkGray">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -180,6 +181,7 @@
                     </StackPanel>
                 </Grid>
 
+
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,5,0,5" Orientation="Vertical">
                     <TextBlock Margin="10,0,0,0" 
                            Text="Số lượng tồn kho"
@@ -188,11 +190,11 @@
                            Foreground="#353935"/>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Margin="10,0,0,0" 
-                            FontSize="12"
-                            FontWeight="Bold"
-                            Foreground="#353935">
-                        <Run Text="{Binding Quantity}"/>
-                        <Run Text="sản phẩm"/>
+                                   FontSize="12"
+                                   FontWeight="Bold"
+                                   Foreground="#353935">
+                            <Run Text="{Binding Quantity}"/>
+                            <Run Text="sản phẩm"/>
                         </TextBlock>
                     </StackPanel>
                 </StackPanel>
@@ -206,7 +208,7 @@
             <!--Hiển thị chọn khách hàng-->
             <StackPanel Grid.Column="0" Margin="0,5,0,5" Orientation="Vertical">
                 <TextBlock Margin="10,0,0,0" 
-                           Text="CHỌN KHÁCH HÀNG"
+                           Text="CHỈNH SỬA KHÁCH HÀNG"
                            FontSize="14"
                            FontWeight="Medium"
                            Foreground="#353935"/>
@@ -232,58 +234,6 @@
                         </ComboBox.ItemTemplate>
                     </ComboBox>
                 </Border>
-
-                <TextBlock Margin="10,0,0,0" 
-                           Text="NHẬP KHÁCH HÀNG MỚI"
-                           FontSize="14"
-                           FontWeight="Medium"
-                           Foreground="#353935"/>
-                <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
-                        Grid.Column="0" Background="White"
-                        Height="30" Width="275" Margin="10"
-                        HorizontalAlignment="Left">
-                    <Grid Width="265" Margin="0" HorizontalAlignment="Center">
-                        <TextBox x:Name="CustomerTermTextBox"
-                            BorderThickness="0"
-                            VerticalContentAlignment="Center"
-                            FontSize="13"
-                            Width="265"/>
-                        <TextBlock IsHitTestVisible="False" Text="Nhập tên khách hàng" 
-                                   VerticalAlignment="Center"
-                                   FontSize="13"
-                                   HorizontalAlignment="Left" Margin="5,0,0,0"
-                                   Foreground="DarkGray">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=CustomerTermTextBox}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </Grid>
-                </Border>
-
-                <!--Hiển thị nút bấm lưu -->
-                <Button Name="SaveCustomer"
-                        Grid.Row="4" Grid.Column="2"
-                        Width="30" Height="30"
-                        Style="{StaticResource MyButtonStyle}"
-                        BorderThickness="0.5"
-                        BorderBrush="Red"
-                        HorizontalAlignment="Right"
-                        Margin="0,0,20,0"
-                        Click="SaveCustomer_Click">
-                    <fa:ImageAwesome 
-                        Width="11"
-                        Height="11"
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        Icon="Save"
-                        Foreground="DarkRed"/>
-                </Button>
             </StackPanel>
         </Border>
 
@@ -309,30 +259,31 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="Tên sản phẩm"
-                               VerticalAlignment="Center"
-                               FontSize="12"
-                               FontWeight="Bold"
-                               Foreground="#353935"/>
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#353935"/>
+
                     <TextBlock Grid.Column="1"
-                               Text="Giá"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontSize="12"
-                               FontWeight="Bold"
-                               Foreground="#353935"/>
+                        Text="Giá"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#353935"/>
 
                     <TextBlock Grid.Column="2"
-                               Text="Số lượng"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontSize="12"
-                               FontWeight="Bold"
-                               Foreground="#353935"/>
+                        Text="Số lượng"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#353935"/>
 
                     <TextBlock Grid.Column="3"
-                               Text="Tổng tiền"
-                               HorizontalAlignment="Center" VerticalAlignment="Center"
-                               FontSize="12"
-                               FontWeight="Bold"
-                               Foreground="#353935"/>
+                        Text="Tổng tiền"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        FontSize="12"
+                        FontWeight="Bold"
+                        Foreground="#353935"/>
                 </Grid>
                 
                 <ListView Name="ordersListView"
@@ -352,23 +303,21 @@
 
                                 <TextBlock Grid.Column="0"
                                     Margin="0,0,0,0"
-                                    Text="{Binding ProName}"
+                                    Text="{Binding Product.ProName}"
                                     FontWeight="Medium"
                                     Foreground="#353935"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"/>
+                                    HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                                 <TextBlock Grid.Column="1"
                                     Margin="0,0,20,0"
-                                    Text="{Binding Price, Converter={StaticResource currencyConverter}}"
+                                    Text="{Binding Product.PromotionPrice, Converter={StaticResource currencyConverter}}"
                                     FontWeight="Medium"
                                     Foreground="#353935"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"/>
+                                    HorizontalAlignment="Right" VerticalAlignment="Center"/>
 
                                 <TextBlock Grid.Column="2"
                                     Margin="0,0,30,0"
-                                    Text="{Binding Quantity}"
+                                    Text="{Binding Purchase.Quantity}"
                                     TextWrapping="Wrap"
                                     FontWeight="Medium"
                                     HorizontalAlignment="Right" VerticalAlignment="Center"
@@ -376,7 +325,7 @@
 
                                 <TextBlock Grid.Column="3"
                                     Margin="0,0,0,0"
-                                    Text="{Binding TotalPrice, Converter={StaticResource currencyConverter}}"
+                                    Text="{Binding Purchase.TotalPrice, Converter={StaticResource currencyConverter}}"
                                     TextWrapping="Wrap"
                                     FontWeight="Medium"
                                     HorizontalAlignment="Right" VerticalAlignment="Center"
@@ -394,13 +343,15 @@
             </Grid>
         </Border>
 
-        <StackPanel HorizontalAlignment="Right" Grid.Row="3" Grid.Column="2"
-                    Margin="70,20,20,10" Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Grid.Row="3" Grid.Column="2" Margin="70,20,20,10">
             <TextBlock Margin="10,0,0,0" 
                 Text="Tổng:"
                 FontSize="16"
                 FontWeight="ExtraBold"
                 Foreground="#353935"/>
+            
             <TextBlock x:Name="FinalPrice" Margin="10,0,0,0" 
                 Text="100000000 đ"
                 FontSize="18"

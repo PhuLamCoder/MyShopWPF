@@ -16,16 +16,14 @@ namespace MyShop.Views.MainView.Pages
 		private ProductBUS _productBUS;
 		private CustomerBUS _customerBUS;
 		private ShopOrderBUS _orderBUS;
-		private bool _verifyOrder = false;
+
 		private ObservableCollection<Data> _data;
-
 		private ObservableCollection<CustomerDTO> _customers;
-
 		private ObservableCollection<ProductDTO> _products;
+
 		private ProductDTO _currentProduct;
 
 		private Decimal _currentTotalPrice = 0;
-		private ObservableCollection<ManageOrder.Data> _list;
 		private List<PurchaseDTO> _purchaseBuffer;
 
 		public class Data
@@ -36,31 +34,30 @@ namespace MyShop.Views.MainView.Pages
 			public decimal TotalPrice { get; set; }
 		}
 
-
-		public AddOrder(Frame pageNavigation, ObservableCollection<ManageOrder.Data> list)
+		public AddOrder(Frame pageNavigation)
 		{
 			_pageNavigation = pageNavigation;
+
 			_productBUS = new ProductBUS();
 			_customerBUS = new CustomerBUS();
 			_orderBUS = new ShopOrderBUS();
+
+			_currentProduct = new ProductDTO();
 			_data = new ObservableCollection<Data>();
 			_purchaseBuffer = new List<PurchaseDTO>();
 
-			_list = list;
 			InitializeComponent();
 		}
 
 		private async void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			var products = await _productBUS.getAll(sortBy: "name");
-			_products = products;
-			ProductCombobox.ItemsSource = products;
-			_currentProduct = products[0];
+			_products = await _productBUS.getAll(sortBy: "name");
+			ProductCombobox.ItemsSource = _products;
+			_currentProduct .copy(_products[0]);
 			ProductCombobox.SelectedIndex = 0;
 
-			var customers = _customerBUS.getAll(sortBy: "name");
-			_customers = customers;
-			CustomerCombobox.ItemsSource = customers;
+			_customers = _customerBUS.getAll(sortBy: "name");
+			CustomerCombobox.ItemsSource = _customers;
 			CustomerCombobox.SelectedIndex = 0;
 
 			FinalPrice.Text = string.Format("{0:N0} đ", _currentTotalPrice);
@@ -71,30 +68,36 @@ namespace MyShop.Views.MainView.Pages
 
 		private void SaveOrder_Click(object sender, RoutedEventArgs e)
 		{
-			var customerDTO = (CustomerDTO)CustomerCombobox.SelectedValue;
-			var shopOrderDTO = new ShopOrderDTO();
-
-			shopOrderDTO.CusID = customerDTO.CusID;
-			shopOrderDTO.CreateAt = DateTime.Now.Date;
-			shopOrderDTO.FinalTotal = _currentTotalPrice;
-			shopOrderDTO.ProfitTotal = _orderBUS.calOrderProfit(_currentTotalPrice);
-
-			int orderID = _orderBUS.addShopOrder(shopOrderDTO);
-
-			// lúc này mới lưu vào database 
-			foreach (var purchase in _purchaseBuffer)
+			if (_purchaseBuffer.Count > 0)
 			{
-				// lúc mà thêm purchase thì ở DAO đã xóa số lượng bên product luôn rồi !
-				purchase.OrderID = orderID;
-				_orderBUS.addPurchase(purchase);
+				var customerDTO = (CustomerDTO) CustomerCombobox.SelectedValue;
+				var shopOrderDTO = new ShopOrderDTO();
+
+				shopOrderDTO.CusID = customerDTO.CusID;
+				shopOrderDTO.CreateAt = DateTime.Now.Date;
+				shopOrderDTO.FinalTotal = _currentTotalPrice;
+				shopOrderDTO.ProfitTotal = _orderBUS.calOrderProfit(_currentTotalPrice);
+
+				int orderID = _orderBUS.addShopOrder(shopOrderDTO);
+
+				// lúc này mới lưu vào database 
+				foreach (var purchase in _purchaseBuffer)
+				{
+					// lúc mà thêm purchase thì ở DAO đã xóa số lượng bên product luôn rồi !
+					purchase.OrderID = orderID;
+					_orderBUS.addPurchase(purchase);
+				}
+
+				// Thêm vào cho danh sách order trang manage
+				MessageBox.Show("Đã lưu đơn hàng thành công!", "Thông Báo",
+					MessageBoxButton.OK, MessageBoxImage.Information);
+				_pageNavigation.NavigationService.GoBack();
 			}
-
-			// Thêm vào cho danh sách order trang manage
-			_list.Add(new ManageOrder.Data(shopOrderDTO));
-
-			MessageBox.Show("Đã lưu đơn hàng thành công!", "Thông Báo", 
-				MessageBoxButton.OK, MessageBoxImage.Information);
-			_pageNavigation.NavigationService.GoBack();
+			else
+			{
+				MessageBox.Show("Bạn chưa chọn sản phẩm nào!", "Thông Báo",
+					MessageBoxButton.OK, MessageBoxImage.Warning);
+			}
 		}
 
 		private void AddProduct_Click(object sender, RoutedEventArgs e)
@@ -123,6 +126,13 @@ namespace MyShop.Views.MainView.Pages
 			purchareDTO.ProID = productDTO.ProId;
 			purchareDTO.Quantity = quantity;
 			purchareDTO.TotalPrice = priceOfProduct * quantity;
+			var existedPurchase = _purchaseBuffer.Find(purchase => purchase.ProID == purchareDTO.ProID);
+			if (existedPurchase != null)
+			{
+				MessageBoxResult result = MessageBox.Show("Xóa và thêm lại để cập nhật số lượng!", "Thông Báo",
+				MessageBoxButton.OK, MessageBoxImage.Warning);
+				return;
+			}
 			_purchaseBuffer.Add(purchareDTO);
 
 			// Hiển thị thông tin lên giao diện
@@ -133,7 +143,11 @@ namespace MyShop.Views.MainView.Pages
 				ProName = productDTO.ProName!,
 				TotalPrice = priceOfProduct * quantity
 			};
+
+			// Cập nhật lại số lượng trên giao diện và số lượng trong danh sách
 			_currentProduct.Quantity -= quantity;
+			_products.First(product => product.ProId == _currentProduct.ProId).Quantity -= quantity;
+
 			_currentTotalPrice += data.TotalPrice;
 			_data.Add(data);
 
@@ -142,17 +156,12 @@ namespace MyShop.Views.MainView.Pages
 
 		private void BackButton_Click(object sender, RoutedEventArgs e)
 		{
-			MessageBoxResult result;
-			if (_verifyOrder == true)
+			MessageBoxResult result = MessageBox.Show("Đơn hàng chưa được lưu. Bạn có muốn tiếp tục không?", "Thông Báo", 
+				MessageBoxButton.YesNo, MessageBoxImage.Question);
+			if (result == MessageBoxResult.No)
 			{
-				result = MessageBox.Show("Đơn hàng chưa được lưu. Bạn có muốn tiếp tục không?", "Thông Báo", MessageBoxButton.YesNo);
-				if (result == MessageBoxResult.Yes)
-				{
-					return;
-				}
+				_pageNavigation.NavigationService.GoBack();
 			}
-
-			_pageNavigation.NavigationService.GoBack();
 		}
 
 		private void SaveCustomer_Click(object sender, RoutedEventArgs e)
@@ -180,7 +189,20 @@ namespace MyShop.Views.MainView.Pages
 			if (result == MessageBoxResult.Yes)
 			{
 				int index = ordersListView.SelectedIndex; if (index == -1) return;
+				_currentTotalPrice -= _data[index].TotalPrice;
+				FinalPrice.Text = string.Format("{0:N0} đ", _currentTotalPrice);
+
+				// Tăng lại số lượng sản phẩn khi xóa khỏi danh sách mua
+				var deleteProduct = _products.First(product => product.ProId == _purchaseBuffer[index].ProID);
+				deleteProduct.Quantity += _purchaseBuffer[index].Quantity;
+				// Cập nhật lại số lượng lên giao diện
+				if (deleteProduct.ProId  == _currentProduct.ProId)
+				{
+					_currentProduct.copy(deleteProduct);
+				}
+
 				_data.RemoveAt(index);
+				_purchaseBuffer.RemoveAt(index);
 			}
 		}
 

@@ -72,5 +72,26 @@ namespace MyShop.BUS
 		{
 			_orderDAO.insertPurchase(purchaseDTO);
 		}
+
+		public List<PurchaseDTO> findPurchases(int orderID)
+		{
+			return _orderDAO.getPurchases(orderID);
+		}
+
+		public void updateShopOrder(ShopOrderDTO shopOrderDTO)
+		{
+			_orderDAO.updateShopOrder(shopOrderDTO);
+		}
+
+		public void deleteOrderPurchase(int orderID)
+		{
+			// Xóa các purchase của 1 order đồng thời cập nhật lại số lượng của sản phẩm (tăng lên)
+			_orderDAO.deleteOrderPurchase(orderID);
+		}
+
+		public void delOrderById(int orderID)
+		{
+			_orderDAO.deleteOrderById(orderID);
+		}
 	}
 }

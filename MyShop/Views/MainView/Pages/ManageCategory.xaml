@@ -18,7 +18,7 @@
 
         <TextBlock
             Text="Categories"
-            Margin="30,0,0,0"
+            Margin="30,0,0,-10"
             Foreground="#8B4000"
             VerticalAlignment="Center"
             FontSize="25"

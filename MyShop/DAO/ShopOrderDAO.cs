@@ -69,13 +69,98 @@ namespace MyShop.DAO
 
 			command.ExecuteNonQuery();
 
-			// Xóa Quantity ở sản phẩm ProID
+			// Cập nhật Quantity ở sản phẩm ProID
 			ProductBUS productBUS = new ProductBUS();
 			var product = productBUS.findProductById(purchaseDTO.ProID);
 
 			product.Quantity = product.Quantity - purchaseDTO.Quantity;
 
 			productBUS.updateProduct(product);
+		}
+
+		public List<PurchaseDTO> getPurchases(int orderId)
+		{
+			List<PurchaseDTO> list = new List<PurchaseDTO>();
+			string query = "SELECT * FROM purchase WHERE OrderID = @id";
+
+			var command = new SqlCommand(query, db.connection);
+			command.Parameters.Add("@id", SqlDbType.Int).Value = orderId;
+
+			var reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				PurchaseDTO purchase = new PurchaseDTO();
+				purchase.PurchaseID = (int)reader["PurchaseID"];
+				purchase.OrderID = (int)reader["OrderID"];
+				purchase.ProID = (int)reader["ProID"];
+				purchase.Quantity = (int)reader["Quantity"];
+				purchase.TotalPrice = (decimal)reader["TotalPrice"];
+
+				list.Add(purchase);
+			}
+
+			reader.Close();
+			return list;
+		}
+
+		public void updateShopOrder(ShopOrderDTO shopOrder)
+		{
+			string query = """
+				UPDATE shop_order
+				SET CusID =  @CusID, 
+					CreateAt = @CreateAt, 
+					FinalTotal = @FinalTotal, 
+					ProfitTotal = @ProfitTotal
+				WHERE OrderID = @OrderID
+				""";
+			var command = new SqlCommand(query, db.connection);
+
+			command.Parameters.Add("@OrderID", SqlDbType.Int).Value = shopOrder.OrderID;
+			command.Parameters.Add("@CusID", SqlDbType.Int).Value = shopOrder.CusID;
+			command.Parameters.Add("@CreateAt", SqlDbType.Date).Value = shopOrder.CreateAt;
+			command.Parameters.Add("@FinalTotal", SqlDbType.Money).Value = shopOrder.FinalTotal;
+			command.Parameters.Add("@ProfitTotal", SqlDbType.Money).Value = shopOrder.ProfitTotal;
+
+			command.ExecuteNonQuery();
+		}
+
+		public void deleteOrderPurchase(int orderID)
+		{
+			List<PurchaseDTO> purchases = getPurchases(orderID);
+
+			// Cập nhật Quantity ở sản phẩm ProID
+			foreach (var purchaseDTO in purchases)
+			{
+				ProductBUS productBUS = new ProductBUS();
+				var product = productBUS.findProductById(purchaseDTO.ProID);
+				product.Quantity = product.Quantity + purchaseDTO.Quantity;
+
+				productBUS.updateProduct(product);
+			}
+
+			// Xóa những purchase của orderID
+			string query = """
+				DELETE FROM purchase
+				WHERE OrderID = @OrderID
+				""";
+			var command = new SqlCommand(query, db.connection);
+			command.Parameters.Add("@OrderID", SqlDbType.Int).Value = orderID;
+			command.ExecuteNonQuery();
+		}
+
+		public void deleteOrderById(int orderID)
+		{
+			// Xóa ở bảng purchase và cập nhật lại số lượng product
+			deleteOrderPurchase(orderID);
+
+			// Xóa ở bảng shop_order
+			string sql = $"""
+                DELETE FROM shop_order 
+                WHERE OrderID = @OrderID
+                """;
+			var command = new SqlCommand(sql, db.connection);
+			command.Parameters.Add("@OrderID", SqlDbType.Int).Value = orderID;
+			command.ExecuteNonQuery();
 		}
 	}
 }

@@ -96,7 +96,7 @@ namespace MyShop.Views.MainView.Pages
 
 		private void AddOrder_Click(object sender, RoutedEventArgs e)
 		{
-			_pageNavigation.NavigationService.Navigate(new AddOrder(_pageNavigation, _list));
+			_pageNavigation.NavigationService.Navigate(new AddOrder(_pageNavigation));
 		}
 
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -106,7 +106,7 @@ namespace MyShop.Views.MainView.Pages
 
 			if (order != null)
 			{
-				//_pageNavigation.NavigationService.Navigate(new SuperOrderDetail(order, _pageNavigation));
+				_pageNavigation.NavigationService.Navigate(new OrderDetail(order, _pageNavigation));
 			}
 		}
 

@@ -130,19 +130,20 @@
                         FontWeight="Bold"
                         FontFamily="Segoe UI"/>
 
-                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10, 0, 10, 0">
+                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10,0,10,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.6*"/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="0.8*"/>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Left"
+                                Orientation="Horizontal">
                         <fa:ImageAwesome 
                             Width="12"
                             Height="12"
-                            Margin="0,0,6, 0"
+                            Margin="0,0,6,0"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Icon="Key"
                             Foreground="#8B4000"/>
@@ -153,7 +154,7 @@
                                 Foreground="#353935"/>
                     </StackPanel>
 
-                    <StackPanel Margin="-50,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="1">
                         <fa:ImageAwesome 
                             Width="12"
                             Height="12"
@@ -169,7 +170,7 @@
                             Foreground="#353935"/>
                     </StackPanel>
 
-                    <StackPanel Margin="10, 0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="2">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="2">
                         <fa:ImageAwesome 
                             Width="12" Height="12"
                             Margin="0,0,6,0"
@@ -185,7 +186,7 @@
                             Foreground="#353935"/>
                     </StackPanel>
 
-                    <StackPanel Margin="0,0,20,0" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="3">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal" Grid.Column="3">
                         <fa:ImageAwesome 
                             Width="12" Height="12"
                             Margin="0,0,6,0"
@@ -209,12 +210,12 @@
                           Background="Transparent">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Width="800" Height="35" Margin="10,0,10,0">
+                            <Grid Width="700" Height="35" Margin="10,0,10,0">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="0.3*"/>
+                                    <ColumnDefinition Width="0.6*"/>
                                     <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
-                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="0.8*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock
@@ -232,21 +233,21 @@
                                     Text="{Binding CreateAt, StringFormat=dd/MM/yyyy}"
                                     FontWeight="Medium"
                                     Foreground="#353935"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center"/>
 
                                 <TextBlock Grid.Column="2"
                                     Text="{Binding CusName}"
-                                    FontWeight="Medium"
+                                    FontWeight="Medium" Margin="8,0,0,0"
                                     Foreground="#353935"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Left"
                                     VerticalAlignment="Center"/>
 
                                 <TextBlock Grid.Column="3"
                                     Text="{Binding FinalTotal}"
-                                    TextWrapping="Wrap"
+                                    TextWrapping="Wrap" Margin="0,0,46,0"
                                     FontWeight="Medium"
-                                    HorizontalAlignment="Center"
+                                    HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Foreground="#353935"/>
                             </Grid>
