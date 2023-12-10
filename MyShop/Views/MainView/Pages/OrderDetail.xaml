@@ -31,7 +31,7 @@
                 Width="85" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Orange"
+                BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Margin="20,10,0,0"
                 Click="BackButton_Click">
@@ -42,8 +42,8 @@
                     Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Backward"
-                    Foreground="#8B4000"/>
-                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#8B4000"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -56,7 +56,7 @@
                 <TextBlock
                     Text="Thông tin người mua"
                     Margin="10, 15, 0, 15"
-                    Foreground="#8B4000"
+                    Foreground="#0B666A"
                     VerticalAlignment="Center"
                     FontSize="14"
                     FontWeight="Bold"
@@ -73,7 +73,7 @@
                 <TextBlock
                     Text="Thời gian"
                     Margin="10,15,0,15"
-                    Foreground="#8B4000"
+                    Foreground="#0B666A"
                     VerticalAlignment="Center"
                     FontSize="14"
                     FontWeight="Bold"
@@ -90,7 +90,7 @@
                 <TextBlock
                     Text="Thông tin đơn hàng"
                     Margin="10,15,0,15"
-                    Foreground="#8B4000"
+                    Foreground="#0B666A"
                     VerticalAlignment="Center"
                     FontSize="14"
                     FontWeight="Bold"
@@ -143,7 +143,7 @@
 
                 <TextBlock Text="Danh sách những sản phẩm trong đơn hàng"
                            Margin="10,5,5,5"
-                           Foreground="#8B4000"
+                           Foreground="#071952"
                            VerticalAlignment="Center"
                            FontSize="14"
                            FontWeight="Bold"
@@ -263,7 +263,7 @@
                 Width="100" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Orange"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,160,0"
                 Click="UpdateOrder_Click">
@@ -274,9 +274,9 @@
                     Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Refresh"
-                    Foreground="#8B4000"/>
+                    Foreground="#071952"/>
 
-                <TextBlock Text="Cập nhật" FontWeight="Medium" Foreground="#8B4000"/>
+                <TextBlock Text="Cập nhật" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -286,7 +286,7 @@
                 Width="120" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Red"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,20,0"
                 Click="DelOrder_Click">
@@ -297,9 +297,9 @@
                     Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Remove"
-                    Foreground="DarkRed"/>
+                    Foreground="#071952"/>
 
-                <TextBlock Text="Xóa hóa đơn" FontWeight="Medium" Foreground="DarkRed"/>
+                <TextBlock Text="Xóa hóa đơn" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>

@@ -33,7 +33,7 @@
                 Width="85" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Orange"
+                BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Margin="20,10,0,0"
                 Click="BackButton_Click">
@@ -44,8 +44,8 @@
                     Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Backward"
-                    Foreground="#8B4000"/>
-                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#8B4000"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -75,7 +75,7 @@
                     <Border Grid.Column="1"
                             HorizontalAlignment="Left"
                             Height="30" Width="250" Margin="10"
-                            BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                            BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Background="WhiteSmoke">
                         <ComboBox SelectionChanged="ProductCombobox_SelectionChanged"
                                   Name="ProductCombobox"
@@ -99,7 +99,7 @@
 
                 <!--Hiển thị nhập số lượng-->
                 <StackPanel Grid.Column="1" Margin="0,5,0,5" Orientation="Vertical">
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="30" Width="100" Margin="0,28,0,10">
                         <Grid Width="100" Margin="0" HorizontalAlignment="Center">
@@ -134,14 +134,14 @@
                         Width="30" Height="30"
                         Style="{StaticResource MyButtonStyle}"
                         BorderThickness="0.5"
-                        BorderBrush="Orange"
+                        BorderBrush="#071952"
                         HorizontalAlignment="Right"
                         Click="AddProduct_Click">
                     <fa:ImageAwesome 
                         Width="14" Height="14"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Icon="Plus"
-                        Foreground="#8B4000"/>
+                        Foreground="#071952"/>
                 </Button>
 
                 <Grid Grid.Row="1">
@@ -213,7 +213,7 @@
                 <Border Grid.Column="1"
                         HorizontalAlignment="Left"
                         Height="30" Width="275" Margin="10"
-                        BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                         Background="WhiteSmoke">
                     <ComboBox Name="CustomerCombobox"
                               BorderThickness="0" BorderBrush="Transparent" Width="265"
@@ -238,7 +238,7 @@
                            FontSize="14"
                            FontWeight="Medium"
                            Foreground="#353935"/>
-                <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                         Grid.Column="0" Background="White"
                         Height="30" Width="275" Margin="10"
                         HorizontalAlignment="Left">
@@ -414,7 +414,7 @@
                 Width="120" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Red"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,20,0"
                 Click="SaveOrder_Click">
@@ -425,8 +425,8 @@
                     Margin="0, 0, 8, 0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Save"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Lưu đơn hàng" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Lưu đơn hàng" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>

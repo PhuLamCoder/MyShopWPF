@@ -31,7 +31,7 @@
         <Button Name="BackButton"
                 Width="85" Height="30"
                 Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="Orange"
+                BorderThickness="0.5" BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Margin="20,10,0,0"
                 Click="BackButton_Click">
@@ -40,11 +40,11 @@
                     Name="CatIcon"
                     Width="11"
                     Height="11"
-                    Margin="0, 0, 8, 0"
+                    Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Backward"
-                    Foreground="#8B4000"/>
-                <TextBlock FontWeight="Bold" Foreground="#8B4000">Trở về</TextBlock>
+                    Foreground="#071952"/>
+                <TextBlock FontWeight="Bold" Foreground="#071952">Trở về</TextBlock>
             </StackPanel>
         </Button>
         
@@ -105,12 +105,12 @@
                                     Margin="0, 0, 8, 0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Flag"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
 
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Loại Sản Phẩm"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
 
@@ -130,12 +130,12 @@
                                     Margin="0, 0, 8, 0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Money"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
 
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Giá bán"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
@@ -143,7 +143,7 @@
                             <StackPanel Orientation="Horizontal" Name="PriceSP">
                                 <TextBlock 
                                     Text="{Binding Product.PromotionPrice, Converter={StaticResource currencyConverter}}"
-                                    Foreground="DarkRed"
+                                    Foreground="#071952"
                                     FontWeight="Bold"
                                     FontSize="20"
                                     Margin="22,0,0,0"/>
@@ -157,7 +157,7 @@
 
                                     <TextBlock
                                         Name ="PromotionTextBlock"
-                                        Foreground="DarkRed"
+                                        Foreground="#071952"
                                         FontWeight="Bold"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
@@ -175,11 +175,11 @@
                                     Margin="0, 0, 8, 0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Signal"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
                                 <!-- binding -->
                                 <TextBlock
                                     Text="SL Tồn Kho" 
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
@@ -196,16 +196,15 @@
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome 
-                                    Width="14"
-                                    Height="14"
-                                    Margin="0, 0, 8, 0"
+                                    Width="14" Height="14"
+                                    Margin="0,0,8,0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Gears"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Ram"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
@@ -221,20 +220,20 @@
                                 <fa:ImageAwesome 
                                     Width="14"
                                     Height="14"
-                                    Margin="0, 0, 8, 0"
+                                    Margin="0,0,8,0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Gear"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
 
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Rom"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
 
-                            <TextBlock FontSize="14" Foreground="#353935" Margin="22, 0,0,0">
+                            <TextBlock FontSize="14" Foreground="#353935" Margin="22,0,0,0">
                                 <Run Text="{Binding Product.Rom}"/>
                                 <Run Text="GB"/>
                             </TextBlock>
@@ -244,22 +243,21 @@
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome 
-                                    Width="14"
-                                    Height="14"
-                                    Margin="0, 0, 8, 0"
+                                    Width="14" Height="14"
+                                    Margin="0,0,8,0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Battery2"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
 
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Dung lượng Pin"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
 
-                            <TextBlock FontSize="14" Foreground="#353935" Margin="22, 0,0,0">
+                            <TextBlock FontSize="14" Foreground="#353935" Margin="22,0,0,0">
                                 <Run Text="{Binding Product.BatteryCapacity}"></Run>
                                 <Run Text="mAh"></Run>
                             </TextBlock>
@@ -269,22 +267,21 @@
                         <StackPanel Orientation="Vertical">
                             <StackPanel Orientation="Horizontal">
                                 <fa:ImageAwesome 
-                                    Width="14"
-                                    Height="14"
-                                    Margin="0, 0, 8, 0"
+                                    Width="14" Height="14"
+                                    Margin="0,0,8,0"
                                     RenderOptions.BitmapScalingMode="HighQuality"
                                     Icon="Desktop"
-                                    Foreground="#8B4000"/>
+                                    Foreground="#0B666A"/>
 
                                 <!-- binding -->
                                 <TextBlock
                                     Text="Kích Thước Màn Hình"
-                                    Foreground="#8B4000"
+                                    Foreground="#0B666A"
                                     FontSize="12"
                                     FontWeight="Medium"/>
                             </StackPanel>
 
-                            <TextBlock FontSize="14" Foreground="#353935" Margin="22, 0,0,0">
+                            <TextBlock FontSize="14" Foreground="#353935" Margin="22,0,0,0">
                                 <Run Text="{Binding Product.ScreenSize}"></Run>
                                 <Run Text="inch"></Run>
                             </TextBlock>
@@ -313,7 +310,7 @@
                                Foreground="#353935" FontSize="16" FontWeight="Bold"/>
                     <Border HorizontalAlignment="Left" VerticalAlignment="Bottom"
                             Height="30" Width="170" Margin="0,2,20,10"
-                            BorderThickness="0.5" BorderBrush="Orange" CornerRadius="14" Background="WhiteSmoke">
+                            BorderThickness="0.5" BorderBrush="#071952" CornerRadius="14" Background="WhiteSmoke">
                         <ComboBox Name="PromotionsCombobox"
                                   BorderThickness="0" BorderBrush="Transparent" Width="140"
                                   VerticalContentAlignment="Center"
@@ -338,18 +335,17 @@
         <Button Grid.Row="2" Grid.Column="1" Name="UpdateButton"
                 Width="100" Height="30"
                 Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="Orange"
+                BorderThickness="0.5" BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Click="UpdateButton_Click">
             <StackPanel Orientation="Horizontal">
                 <fa:ImageAwesome 
-                    Width="11"
-                    Height="11"
-                    Margin="0, 0, 8, 0"
+                    Width="11" Height="11"
+                    Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Refresh"
-                    Foreground="#8B4000"/>
-                <TextBlock Text="Cập nhật" FontWeight="Medium" Foreground="#8B4000"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Cập nhật" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -358,19 +354,18 @@
                 Width="120" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Red"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,20,0"
                 Click="DelProduct_Click">
             <StackPanel Orientation="Horizontal">
                 <fa:ImageAwesome 
-                    Width="11"
-                    Height="11"
-                    Margin="0, 0, 8, 0"
+                    Width="11" Height="11"
+                    Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Remove"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Xóa sản phẩm" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Xóa sản phẩm" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>

@@ -39,6 +39,33 @@ namespace MyShop.Views.MainView.Pages
 			InitializeComponent();
 		}
 
+		private async void Page_Loaded(object sender, RoutedEventArgs e)
+		{
+			int currentYear = DateTime.Now.Year;
+			for (int year = currentYear - 2; year <= currentYear; year++)
+			{
+				var item = new ComboBoxItem();
+				item.Content = $"Năm {year.ToString()}";
+				YearCombobox.Items.Add(item);
+			}
+
+			chart.AxisY.Add(new Axis
+			{
+				Foreground = Brushes.Black,
+				Title = "Số lượng đã bán",
+				MinValue = 0
+			});
+			Title.Text = "Đang hiển thị chế độ xem theo năm";
+
+			ObservableCollection<ProductDTO> products = await _productBUS.getAll();
+
+			ProductsCombobox.ItemsSource = products;
+			ProductsCombobox.SelectedIndex = 0;
+
+			_currentProduct = (ProductDTO)ProductsCombobox.SelectedValue;
+			displayYearMode(_currentProduct);
+		}
+
 		private void displayYearMode(ProductDTO product)
 		{
 			var quantities = _reportBUS.groupQuantityOfProductByYear(product);
@@ -50,7 +77,7 @@ namespace MyShop.Views.MainView.Pages
 
 			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Số lượng đã bán theo năm",
 				Values = valuesColChart
 			});
@@ -82,7 +109,7 @@ namespace MyShop.Views.MainView.Pages
 
 			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Số lượng đã bán theo tháng",
 				Values = valuesColChart
 			});
@@ -112,7 +139,7 @@ namespace MyShop.Views.MainView.Pages
 
 			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Số lượng đã bán theo tuần",
 				Values = valuesColChart
 			});
@@ -140,7 +167,7 @@ namespace MyShop.Views.MainView.Pages
 
 			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Số lượng đã bán theo ngày",
 				Values = valuesColChart
 			});
@@ -240,38 +267,6 @@ namespace MyShop.Views.MainView.Pages
 			}
 		}
 
-		private async void Page_Loaded(object sender, RoutedEventArgs e)
-		{
-			int currentYear = DateTime.Now.Year;
-			for (int year = currentYear - 2; year <= currentYear; year++)
-			{
-				var item = new ComboBoxItem();
-				item.Content = $"Năm {year.ToString()}";
-				YearCombobox.Items.Add(item);
-			}
-
-			chart.AxisY.Add(new Axis
-			{
-				Foreground = Brushes.Black,
-				Title = "Số lượng đã bán",
-				MinValue = 0
-			});
-			Title.Text = "Đang hiển thị chế độ xem theo năm";
-
-			ObservableCollection<ProductDTO> products = await _productBUS.getAll();
-
-			ProductsCombobox.ItemsSource = products;
-			ProductsCombobox.SelectedIndex = 0;
-
-			_currentProduct = (ProductDTO) ProductsCombobox.SelectedValue;
-			displayYearMode(_currentProduct);
-		}
-
-		private void BackButton_Click(object sender, RoutedEventArgs e)
-		{
-			_pageNavigation.NavigationService.GoBack();
-		}
-
 		private void Search_Click(object sender, RoutedEventArgs e)
 		{
 			var startDate = StartDate.SelectedDate;
@@ -288,6 +283,12 @@ namespace MyShop.Views.MainView.Pages
 				MonthCombobox.SelectedIndex = 0;
 				displayDateMode(_currentProduct, (DateTime)startDate, (DateTime)endDate);
 			}
+		}
+
+		private void BackButton_Click(object sender, RoutedEventArgs e)
+		{
+			_pageNavigation.NavigationService.Navigate(new RevenueReport(_pageNavigation));
+			//_pageNavigation.NavigationService.GoBack();
 		}
 	}
 }

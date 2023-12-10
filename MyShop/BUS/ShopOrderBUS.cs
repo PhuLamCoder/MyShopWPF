@@ -27,6 +27,21 @@ namespace MyShop.BUS
 			return ordersByLastWeek.Count;
 		}
 
+		public int countTotalOrderbyLastMonth()
+		{
+			var orders = _orderDAO.getAll();
+
+			DateTime today = DateTime.Today;
+			DateTime startOfMonth = new DateTime(today.Year, today.Month, 1);
+			DateTime endOfMonth = startOfMonth.AddMonths(1).AddDays(-1);
+
+			var ordersByLastMonth = orders.Where(
+				order => order.CreateAt.Date >= startOfMonth.Date && order.CreateAt.Date <= endOfMonth.Date)
+				.ToList();
+
+			return ordersByLastMonth.Count;
+		}
+
 		public Tuple<List<ShopOrderDTO>, int> findOrderBySearch(int currentPage = 1, int rowsPerPage = 6,
 			 DateTime? startDate = null, DateTime? endDate = null)
 		{

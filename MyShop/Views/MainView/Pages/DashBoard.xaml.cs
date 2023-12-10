@@ -7,10 +7,9 @@ namespace MyShop.Views.MainView.Pages
 {
 	class Resources
 	{
-		public string ProductTotalBG { get; set; }
-		public string OrderTotalBG { get; set; }
 		public int TotalProduct { get; set; }
-		public int TotalOrder { get; set; }
+		public int TotalOrderByWeek { get; set; }
+		public int TotalOrderByMonth { get; set; }
 	}
 
 	/// <summary>
@@ -32,16 +31,15 @@ namespace MyShop.Views.MainView.Pages
 		{
 			int totalProduct = await _productBUS.countTotalProduct();
 
-			int totalOrder = _orderBUS.countTotalOrderbyLastWeek();
-
+			int totalOrderByWeek = _orderBUS.countTotalOrderbyLastWeek();
+			int totalOrderByMonth = _orderBUS.countTotalOrderbyLastMonth();
 			var top5Product = await _productBUS.getTop5Product();
 
 			this.DataContext = new Resources()
 			{
-				ProductTotalBG = "Assets/Images/item1-bg.jpg",
-				OrderTotalBG = "Assets/Images/item2-bg.jpg",
 				TotalProduct = totalProduct,
-				TotalOrder = totalOrder
+				TotalOrderByWeek = totalOrderByWeek,
+				TotalOrderByMonth = totalOrderByMonth,
 			};
 
 			productsListView.ItemsSource = top5Product;

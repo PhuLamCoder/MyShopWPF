@@ -18,7 +18,7 @@
 
         <TextBlock Text="Mã khuyến mãi"
                    Margin="30,0,0,-10"
-                   Foreground="#8B4000"
+                   Foreground="#071952"
                    VerticalAlignment="Center"
                    FontSize="25"
                    FontWeight="Bold"
@@ -49,11 +49,11 @@
                     <TextBlock Grid.Column="0"
                                Text="Tên mã khuyến mãi"
                                VerticalAlignment="Center"
-                               FontSize="12" FontWeight="Bold" Foreground="#353935"/>
+                               FontSize="12" FontWeight="Bold" Foreground="#071952"/>
                     <TextBlock Grid.Column="1"
                                Text="Giá trị giảm giá"
                                VerticalAlignment="Center"
-                               FontSize="12" FontWeight="Bold" Foreground="#353935"/>
+                               FontSize="12" FontWeight="Bold" Foreground="#071952"/>
                 </Grid>
 
                 <ListView Name="promotionListViews"
@@ -108,9 +108,9 @@
                            Text="Mã khuyến mãi"
                            FontSize="12"
                            FontWeight="Medium"
-                           Foreground="#353935"/>
+                           Foreground="#071952"/>
 
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="30" Width="160" Margin="0,10,0,0">
                         <Grid Width="150" Margin="0" HorizontalAlignment="Center">
@@ -144,8 +144,8 @@
                            Text="Giá trị giảm giá" 
                            FontSize="12"
                            FontWeight="Medium"
-                           Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                           Foreground="#071952"/>
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="30" Width="160" Margin="0,10,0,0">
                         <Grid Width="150" Margin="0" HorizontalAlignment="Center">
@@ -177,7 +177,7 @@
                 Grid.Row="3"
                 Width="100" Height="30"
                 Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="Red"
+                BorderThickness="0.5" BorderBrush="#071952"
                 HorizontalAlignment="Right" Margin="0,0,20,0"
                 Click="SavePromotion_Click">
             <StackPanel Orientation="Horizontal">
@@ -187,8 +187,8 @@
                     Margin="0, 0, 8, 0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Save"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Lưu mã" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Lưu mã" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -198,7 +198,7 @@
                 Width="100" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Red"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,140,0"
                 Click="DelPromotion_Click">
@@ -209,8 +209,8 @@
                     Margin="0, 0, 8, 0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Trash"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Xóa mã" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Xóa mã" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>

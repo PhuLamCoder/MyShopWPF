@@ -21,98 +21,137 @@
         <Border Grid.Row="0"
                 Background="#60ffffff"
                 CornerRadius="10"
-                Margin="0, 20, 0, 20"
-        >
+                Margin="0,20,0,20">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Name="ItemButton"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="290"
-                        Margin="10"
-                        Height="140"
+                <Button Grid.Column="0"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Margin="10" Padding="12,8,8,8"
                         BorderThickness="0"
-                        Padding="12, 8,8,8"
                         IsEnabled="False"
                         Style="{StaticResource MyButtonStyle}">
                     <Button.Background>
-                        <ImageBrush ImageSource="{Binding ProductTotalBG, Converter={StaticResource converter}}">
-                        </ImageBrush>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#ED9ED6" Offset="0.0"/>
+                            <GradientStop Color="#C683D7" Offset="0.5"/>
+                            <GradientStop Color="#7071E8" Offset="1.0"/>
+                        </LinearGradientBrush>
                     </Button.Background>
-                    <Grid HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Width="280"
-                          Height="130">
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Width="220" Height="130">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <StackPanel Orientation="Vertical" Margin="10">
-                            <TextBlock Text="Tổng sản phẩm đang bán" FontSize="14" FontWeight="Medium" Foreground="White"/>
-                            <TextBlock Margin="0, 30, 0,0" Text="{Binding TotalProduct}" FontSize="45"
-                                FontWeight="Medium" Foreground="White"/>
-                        </StackPanel>
 
+                        <TextBlock Grid.ColumnSpan="2" Text="Số sản phẩm đang bán" FontSize="16"
+                            FontWeight="Medium" Foreground="White"
+                            Margin="0,8,0,0"/>
+                        <TextBlock Grid.Row="1" Margin="0,0,0,4" Text="{Binding TotalProduct}" FontSize="45"
+                            FontWeight="Medium" Foreground="White"
+                            VerticalAlignment="Bottom"/>
                         <fa:ImageAwesome 
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,0, 10"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,4,10"
+                            Grid.Row="1"
                             Grid.Column="1"
-                            Name="TotalPRoductIcon"
-                            Width="80"
-                            Height="80"
+                            Width="80" Height="80"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Icon="MobilePhone"
-                            Foreground="White"
-                        />
+                            Foreground="White"/>
                     </Grid>
                 </Button>
 
-                <Button Name="OrderButton"
-                        Grid.Column="1"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        Width="290"
-                        Margin="10"
-                        Height="140"
+                <Button Grid.Column="1"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Margin="10" Padding="12,8,8,8"
                         BorderThickness="0"
-                        Padding="12, 8,8,8"
                         IsEnabled="False"
                         Style="{StaticResource MyButtonStyle}">
                     <Button.Background>
-                        <ImageBrush ImageSource="{Binding OrderTotalBG, Converter={StaticResource converter}}">
-                        </ImageBrush>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#FBF6EE" Offset="0.0"/>
+                            <GradientStop Color="#C1F2B0" Offset="0.5"/>
+                            <GradientStop Color="#65B741" Offset="1.0"/>
+                        </LinearGradientBrush>
                     </Button.Background>
-                    <Grid  HorizontalAlignment="Center"
-                           VerticalAlignment="Center"
-                           Width="280"
-                           Height="130">   
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Width="220" Height="130">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="1.5*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Vertical" Margin="10">
-                            <TextBlock Text="Số đơn hàng trong tuần" FontSize="14"
-                                FontWeight="Medium" Foreground="White"/>
-                            <TextBlock Margin="0, 30, 0,0" Text="{Binding TotalOrder}" FontSize="45"
-                                FontWeight="Medium" Foreground="White"/>
-                        </StackPanel>
 
+                        <TextBlock Grid.ColumnSpan="2" Text="Số đơn hàng trong tuần" FontSize="16"
+                            FontWeight="Medium" Foreground="White"
+                            Margin="0,8,0,0"/>
+                        <TextBlock Grid.Row="1" Margin="0,0,0,4" Text="{Binding TotalOrderByWeek}" FontSize="45"
+                            FontWeight="Medium" Foreground="White"
+                            VerticalAlignment="Bottom"/>
                         <fa:ImageAwesome 
-                            VerticalAlignment="Bottom"
-                            Margin="0,0,0, 10"
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,4,10"
+                            Grid.Row="1"
                             Grid.Column="1"
-                            Width="80"
-                            Height="80"
+                            Width="80" Height="80"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Icon="ShoppingCart"
-                            Foreground="White"
-                        />
+                            Foreground="White"/>
+                    </Grid>
+                </Button>
+
+                <Button Grid.Column="2"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        Margin="10" Padding="12,8,8,8"
+                        BorderThickness="0"
+                        IsEnabled="False"
+                        Style="{StaticResource MyButtonStyle}">
+                    <Button.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#F9E8D9" Offset="0.0"/>
+                            <GradientStop Color="#F7B787" Offset="0.5"/>
+                            <GradientStop Color="#EE7214" Offset="1.0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+                          Width="220" Height="130">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.2*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.ColumnSpan="2" Text="Số đơn hàng trong tháng" FontSize="16"
+                            FontWeight="Medium" Foreground="White"
+                            Margin="0,8,0,0"/>
+                        <TextBlock Grid.Row="1" Margin="0,0,0,4" Text="{Binding TotalOrderByMonth}" FontSize="45"
+                            FontWeight="Medium" Foreground="White"
+                            VerticalAlignment="Bottom"/>
+                        <fa:ImageAwesome 
+                            VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                            Margin="0,0,4,10"
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Width="80" Height="80"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Icon="ShoppingCart"
+                            Foreground="White"/>
                     </Grid>
                 </Button>
             </Grid>
@@ -133,12 +172,12 @@
                     <RowDefinition Height="0.15*"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                
+
                 <TextBlock
                     Grid.ColumnSpan="2"
                     Text="Top 5 sản phẩm đang sắp hết hàng"
                     Margin="20, 10, 10, 10"
-                    Foreground="#8B4000"
+                    Foreground="#071952"
                     VerticalAlignment="Center"
                     FontSize="25"
                     FontWeight="Bold"
@@ -157,7 +196,7 @@
                         VerticalAlignment="Center"
                         FontSize="12"
                         FontWeight="Bold"
-                        Foreground="#353935"/>
+                        Foreground="#071952"/>
 
                     <TextBlock
                         Grid.Column="1"
@@ -166,7 +205,7 @@
                         VerticalAlignment="Center"
                         FontSize="12"
                         FontWeight="Bold"
-                        Foreground="#353935"/>
+                        Foreground="#071952"/>
 
                     <TextBlock
                         Grid.Column="2"
@@ -174,9 +213,9 @@
                         VerticalAlignment="Center"
                         FontSize="12"
                         FontWeight="Bold"
-                        Foreground="#353935"/>
+                        Foreground="#071952"/>
                 </Grid>
-                
+
                 <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                           Name="productsListView"
                           BorderThickness="0"

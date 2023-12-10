@@ -13,7 +13,6 @@ namespace MyShop.Views.MainView.Pages
 	public partial class RevenueReport : Page
 	{
 		private ReportBUS _reportBUS;
-		private CartesianChart _chart;
 		private int _currentYear;
 		private Frame _pageNavigation;
 
@@ -22,22 +21,10 @@ namespace MyShop.Views.MainView.Pages
 			_reportBUS = new ReportBUS();
 			_pageNavigation = pageNavigation;
 			InitializeComponent();
-
-			_chart = chart;
-
-			_chart.AxisY.Add(new Axis
-			{
-				Foreground = Brushes.Black,
-				Title = "VNĐ",
-				MinValue = 0,
-				LabelFormatter = value => value.ToString("N0")
-			});
-			Title.Text = "Đang hiển thị chế độ xem theo năm";
 		}
 
-		private void Page_Loaded(object sender, RoutedEventArgs e)
+		private async void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			displayYearMode();
 			int currentYear = DateTime.Now.Year;
 			for (int year = currentYear - 2; year <= currentYear; year++)
 			{
@@ -45,6 +32,17 @@ namespace MyShop.Views.MainView.Pages
 				item.Content = $"Năm {year.ToString()}";
 				YearCombobox.Items.Add(item);
 			}
+
+			chart.AxisY.Add(new Axis
+			{
+				Foreground = Brushes.Black,
+				Title = "VNĐ",
+				MinValue = 0,
+				LabelFormatter = value => value.ToString("N0")
+			});
+			Title.Text = "Đang hiển thị chế độ xem theo năm";
+
+			displayYearMode();
 		}
 
 		private void displayYearMode()
@@ -54,19 +52,19 @@ namespace MyShop.Views.MainView.Pages
 			var valuesColChart = new ChartValues<double>(revenueByYears);
 			var valuesLineChart = new ChartValues<double>(profitByYears);
 
-			_chart.Series = new SeriesCollection();
-			_chart.AxisX = new AxesCollection();
+			chart.Series = new SeriesCollection();
+			chart.AxisX = new AxesCollection();
 
-			_chart.Series.Add(new ColumnSeries()
+			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Doanh thu theo năm",
 				Values = valuesColChart
 			});
 
-			_chart.Series.Add(new LineSeries()
+			chart.Series.Add(new LineSeries()
 			{
-				Stroke = Brushes.DeepSkyBlue,
+				Stroke = Brushes.YellowGreen,
 				Title = "Lợi nhuận theo năm",
 				Values = valuesLineChart
 			});
@@ -92,19 +90,19 @@ namespace MyShop.Views.MainView.Pages
 			var valuesColChart = new ChartValues<double>(revenueByMonths);
 			var valuesLineChart = new ChartValues<double>(profitByMonths);
 
-			_chart.Series = new SeriesCollection();
-			_chart.AxisX = new AxesCollection();
+			chart.Series = new SeriesCollection();
+			chart.AxisX = new AxesCollection();
 
-			_chart.Series.Add(new ColumnSeries()
+			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Doanh thu theo tháng",
 				Values = valuesColChart
 			});
 
-			_chart.Series.Add(new LineSeries()
+			chart.Series.Add(new LineSeries()
 			{
-				Stroke = Brushes.DeepSkyBlue,
+				Stroke = Brushes.YellowGreen,
 				Title = "Lợi nhuận theo tháng",
 				Values = valuesLineChart
 			});
@@ -129,19 +127,19 @@ namespace MyShop.Views.MainView.Pages
 			var valuesColChart = new ChartValues<double>(revenueByWeeks);
 			var valuesLineChart = new ChartValues<double>(profitByWeeks);
 
-			_chart.Series = new SeriesCollection();
-			_chart.AxisX = new AxesCollection();
+			chart.Series = new SeriesCollection();
+			chart.AxisX = new AxesCollection();
 
-			_chart.Series.Add(new ColumnSeries()
+			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Doanh thu theo tuần",
 				Values = valuesColChart
 			});
 
-			_chart.Series.Add(new LineSeries()
+			chart.Series.Add(new LineSeries()
 			{
-				Stroke = Brushes.DeepSkyBlue,
+				Stroke = Brushes.YellowGreen,
 				Title = "Lợi nhuận theo tuần",
 				Values = valuesLineChart
 			});
@@ -164,19 +162,19 @@ namespace MyShop.Views.MainView.Pages
 			var valuesColChart = new ChartValues<double>(revenueByDates);
 			var valuesLineChart = new ChartValues<double>(profitByDates);
 
-			_chart.Series = new SeriesCollection();
-			_chart.AxisX = new AxesCollection();
+			chart.Series = new SeriesCollection();
+			chart.AxisX = new AxesCollection();
 
-			_chart.Series.Add(new ColumnSeries()
+			chart.Series.Add(new ColumnSeries()
 			{
-				Fill = Brushes.Chocolate,
+				Fill = Brushes.MediumBlue,
 				Title = "Doanh thu theo ngày",
 				Values = valuesColChart
 			});
 
-			_chart.Series.Add(new LineSeries()
+			chart.Series.Add(new LineSeries()
 			{
-				Stroke = Brushes.DeepSkyBlue,
+				Stroke = Brushes.YellowGreen,
 				Title = "Lợi nhuận theo ngày",
 				Values = valuesLineChart
 			});
@@ -204,11 +202,6 @@ namespace MyShop.Views.MainView.Pages
 			{
 				displayDateMode((DateTime)startDate, (DateTime)endDate);
 			}
-		}
-
-		private void NextProductReport_Click(object sender, RoutedEventArgs e)
-		{
-			_pageNavigation.NavigationService.Navigate(new ProductReport(_pageNavigation));
 		}
 
 		private void MonthCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -239,6 +232,11 @@ namespace MyShop.Views.MainView.Pages
 				displayMonthMode(currentYear);
 				_currentYear = currentYear;
 			}
+		}
+
+		private void NextProductReport_Click(object sender, RoutedEventArgs e)
+		{
+			_pageNavigation.NavigationService.Navigate(new ProductReport(_pageNavigation));
 		}
 	}
 }

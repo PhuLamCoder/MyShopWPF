@@ -19,7 +19,7 @@
         <Button Name="BackButton"
                 Width="85" Height="30"
                 Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="Orange"
+                BorderThickness="0.5" BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Margin="30,10,0,0"
                 Click="BackButton_Click">
@@ -30,8 +30,8 @@
                     Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Backward"
-                    Foreground="#8B4000"/>
-                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#8B4000"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#071952"/>
             </StackPanel>
         </Button>
 
@@ -52,7 +52,7 @@
                            FontSize="12"
                            FontWeight="Medium"
                            Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="30" Width="160" Margin="10">
                         <Grid Width="150" Margin="0" HorizontalAlignment="Center">
@@ -89,7 +89,7 @@
                            FontSize="12"
                            FontWeight="Medium"
                            Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Background="White"
                             Height="30" Width="160" Margin="10">
                         <Grid Width="150" Margin="0" HorizontalAlignment="Center">
@@ -125,7 +125,7 @@
                 Grid.Row="3" Width="110" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Red"
+                BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,20,0"
                 Click="SavePromotion_Click">
@@ -136,8 +136,8 @@
                     Margin="0, 0, 8, 0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Save"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Lưu mã" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Lưu mã" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>

@@ -27,7 +27,7 @@
                 Width="85" Height="30"
                 Style="{StaticResource MyButtonStyle}"
                 BorderThickness="0.5"
-                BorderBrush="Orange"
+                BorderBrush="#071952"
                 HorizontalAlignment="Left"
                 Margin="20,10,0,0"
                 Click="BackButton_Click">
@@ -39,8 +39,8 @@
                     Margin="0, 0, 8, 0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Backward"
-                    Foreground="#8B4000"/>
-                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#8B4000"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Trở về" FontWeight="Bold" Foreground="#071952"/>
             </StackPanel>
         </Button>
         
@@ -63,7 +63,7 @@
                            FontSize="14"
                            FontWeight="Medium"
                            Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="35" Width="290" Margin="10">
                         <Grid Width="250" Margin="0" HorizontalAlignment="Center">
@@ -102,7 +102,7 @@
                                Foreground="#353935"/>
                     <Border Grid.Column="1" HorizontalAlignment="Center"
                             Height="35" Width="190" Margin="10"
-                            BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                            BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Background="WhiteSmoke">
                         <ComboBox Name="CategoryCombobox" BorderThickness="0" 
                                   BorderBrush="Transparent" Width="180"
@@ -129,7 +129,7 @@
                                FontSize="14"
                                FontWeight="Medium"
                                Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Background="White" Height="35" Width="190" Margin="10">
                         <Grid Width="170" Margin="0" HorizontalAlignment="Center">
                             <TextBox BorderThickness="0" VerticalContentAlignment="Center"
@@ -176,7 +176,7 @@
                 <StackPanel Margin="0, 10, 0, 0" Orientation="Vertical">
                     <TextBlock Margin="20,0,0,0" Text="MÔ TẢ"
                                FontSize="14" FontWeight="Medium" Foreground="#353935"/>
-                    <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                    <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                             Grid.Column="0" Background="White"
                             Height="160" Width="290" Margin="12">
                         <Grid Width="270" Height="170" Margin="0" HorizontalAlignment="Center">
@@ -184,7 +184,7 @@
                                      VerticalContentAlignment="Top" HorizontalContentAlignment="Left"
                                      FontSize="13" Height="160"
                                      TextAlignment="Left" TextWrapping="Wrap" Width="270"
-                                     Text="{Binding Desc}" x:Name="DesTermTextBox" Margin="0,8,0,2"/>
+                                     Text="{Binding Description}" x:Name="DesTermTextBox" Margin="0,8,0,2"/>
                             <TextBlock IsHitTestVisible="False" Text="Nhập mô tả sản phẩm" 
                                        VerticalAlignment="Top" HorizontalAlignment="Left"
                                        FontSize="13" Margin="3,9,0,0" Foreground="DarkGray">
@@ -209,7 +209,7 @@
                         <TextBlock Margin="20,0,0,0" 
                                    Text="RAM" FontSize="14"
                                    FontWeight="Medium" Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Grid.Column="0" Background="White"
                                 Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
@@ -242,7 +242,7 @@
                         <TextBlock Margin="20,0,0,0" 
                                    Text="KÍCH THƯỚC MÀN HÌNH"
                                    FontSize="14" FontWeight="Medium" Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Grid.Column="0" Background="White"
                                 Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
@@ -275,7 +275,7 @@
                                    FontSize="14"
                                    FontWeight="Medium"
                                    Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Grid.Column="0" Background="White"
                                 Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
@@ -309,7 +309,7 @@
                     <StackPanel Margin="0, 10, 0, 0" Orientation="Vertical">
                         <TextBlock Margin="20,0,0,0" Text="ROM"
                                    FontSize="14" FontWeight="Medium" Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Grid.Column="0" Background="White" Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
                                 <TextBox BorderThickness="0" VerticalContentAlignment="Center"
@@ -338,7 +338,7 @@
                     <StackPanel Margin="0, 0, 0, 0" Orientation="Vertical">
                         <TextBlock Margin="20,0,0,0" Text="DUNG LƯỢNG PIN"
                                    FontSize="14" FontWeight="Medium" Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Background="White" Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
                                 <TextBox BorderThickness="0" VerticalContentAlignment="Center"
@@ -366,7 +366,7 @@
                     <StackPanel Margin="0, 0, 0, 0" Orientation="Vertical">
                         <TextBlock Margin="20,0,0,0" Text="SỐ LƯỢNG SẢN PHẨM"
                                    FontSize="14" FontWeight="Medium" Foreground="#353935"/>
-                        <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="5"
+                        <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="5"
                                 Background="White"
                                 Height="35" Width="190" Margin="10">
                             <Grid Width="170" Margin="0" HorizontalAlignment="Center">
@@ -401,7 +401,7 @@
                            FontWeight="Medium"
                            Foreground="#353935"/>
 
-                    <StackPanel Orientation="Horizontal" Margin="30, 0, 30,10">
+                    <StackPanel Orientation="Horizontal" Margin="30,0,30,10">
                         <Button Name="AddImageButton"
                                 VerticalAlignment="Top"
                                 Margin="10,0,0,0" Height="35" Width="50"
@@ -414,11 +414,11 @@
                                 Height="20"
                                 RenderOptions.BitmapScalingMode="HighQuality"
                                 Icon="Image"
-                                Foreground="DarkRed"/>
+                                Foreground="#0B666A"/>
                         </Button>
                         <Image Name="AddedImage"
                                VerticalAlignment="Top"
-                               Margin="80, -35, 0, 0" Width="100" Height="100"
+                               Margin="80,-35,0,0" Width="100" Height="100"
                                Source="{Binding ImagePath, Converter={StaticResource absoluteConverter}}"
                                HorizontalAlignment="Center"/>
                     </StackPanel>
@@ -430,7 +430,7 @@
         <Button Grid.Row="3" Name="SaveProduct"
                 Width="120" Height="30"
                 Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="Red"
+                BorderThickness="0.5" BorderBrush="#071952"
                 HorizontalAlignment="Right"
                 Margin="0,0,20,0"
                 Click="SaveProduct_Click">
@@ -438,11 +438,11 @@
                 <fa:ImageAwesome 
                     Width="11"
                     Height="11"
-                    Margin="0, 0, 8, 0"
+                    Margin="0,0,8,0"
                     RenderOptions.BitmapScalingMode="HighQuality"
                     Icon="Save"
-                    Foreground="DarkRed"/>
-                <TextBlock Text="Lưu sản phẩm" FontWeight="Medium" Foreground="DarkRed"/>
+                    Foreground="#071952"/>
+                <TextBlock Text="Lưu sản phẩm" FontWeight="Medium" Foreground="#071952"/>
             </StackPanel>
         </Button>
     </Grid>
