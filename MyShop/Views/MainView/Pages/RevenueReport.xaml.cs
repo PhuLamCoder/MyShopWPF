@@ -1,9 +1,9 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
-using MyShop.BUS;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MyShop.BUS;
 
 namespace MyShop.Views.MainView.Pages
 {
@@ -38,15 +38,21 @@ namespace MyShop.Views.MainView.Pages
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			displayYearMode();
+			int currentYear = DateTime.Now.Year;
+			for (int year = currentYear - 2; year <= currentYear; year++)
+			{
+				var item = new ComboBoxItem();
+				item.Content = $"Năm {year.ToString()}";
+				YearCombobox.Items.Add(item);
+			}
 		}
 
 		private void displayYearMode()
 		{
-			var pricesByYear = _reportBUS.groupPriceTotalByYear();
-			var profitsByYear = _reportBUS.groupProfitTotalByYear();
+			(var revenueByYears, var profitByYears) = _reportBUS.groupRevenueAndProfitByYear();
 
-			var valuesColChart = new ChartValues<double>(pricesByYear);
-			var valuesLineChart = new ChartValues<double>(profitsByYear);
+			var valuesColChart = new ChartValues<double>(revenueByYears);
+			var valuesLineChart = new ChartValues<double>(profitByYears);
 
 			_chart.Series = new SeriesCollection();
 			_chart.AxisX = new AxesCollection();
@@ -81,11 +87,10 @@ namespace MyShop.Views.MainView.Pages
 
 		private void displayMonthMode(int year)
 		{
-			var pricesByMonth = _reportBUS.groupPriceTotalByMonth(year);
-			var profitsByMonth = _reportBUS.groupProfitTotalByMonth(year);
+			(var revenueByMonths, var profitByMonths) = _reportBUS.groupRevenueAndProfitByMonth(year);
 
-			var valuesColChart = new ChartValues<double>(pricesByMonth);
-			var valuesLineChart = new ChartValues<double>(profitsByMonth);
+			var valuesColChart = new ChartValues<double>(revenueByMonths);
+			var valuesLineChart = new ChartValues<double>(profitByMonths);
 
 			_chart.Series = new SeriesCollection();
 			_chart.AxisX = new AxesCollection();
@@ -119,11 +124,10 @@ namespace MyShop.Views.MainView.Pages
 
 		private void displayWeekMode(int month, int year)
 		{
-			var pricesByWeek = _reportBUS.groupPriceTotalByWeek(month, year);
-			var profitsByWeek = _reportBUS.groupProfitTotalByWeek(month, year);
+			(var revenueByWeeks, var profitByWeeks) = _reportBUS.groupRevenueAndProfitByWeek(month, year);
 
-			var valuesColChart = new ChartValues<double>(pricesByWeek);
-			var valuesLineChart = new ChartValues<double>(profitsByWeek);
+			var valuesColChart = new ChartValues<double>(revenueByWeeks);
+			var valuesLineChart = new ChartValues<double>(profitByWeeks);
 
 			_chart.Series = new SeriesCollection();
 			_chart.AxisX = new AxesCollection();
@@ -155,11 +159,10 @@ namespace MyShop.Views.MainView.Pages
 
 		private void displayDateMode(DateTime startDate, DateTime endDate)
 		{
-			var pricesByDate = _reportBUS.groupPriceTotalByDate(startDate, endDate);
-			var profitsByDate = _reportBUS.groupProfitTotalByDate(startDate, endDate);
+			(var revenueByDates, var profitByDates) = _reportBUS.groupRevenueAndProfitByDate(startDate, endDate);
 
-			var valuesColChart = new ChartValues<double>(pricesByDate);
-			var valuesLineChart = new ChartValues<double>(profitsByDate);
+			var valuesColChart = new ChartValues<double>(revenueByDates);
+			var valuesLineChart = new ChartValues<double>(profitByDates);
 
 			_chart.Series = new SeriesCollection();
 			_chart.AxisX = new AxesCollection();
@@ -205,19 +208,15 @@ namespace MyShop.Views.MainView.Pages
 
 		private void NextProductReport_Click(object sender, RoutedEventArgs e)
 		{
-			//_pageNavigation.NavigationService.Navigate(new StatisticalProduct(_pageNavigation));
+			_pageNavigation.NavigationService.Navigate(new ProductReport(_pageNavigation));
 		}
 
 		private void MonthCombobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			int i = MonthCombobox.SelectedIndex;
-			if (i == -1 || i == 0)
+			int index = MonthCombobox.SelectedIndex;
+			if (index > 0)
 			{
-				return;
-			}
-			else
-			{
-				displayWeekMode(i, _currentYear);
+				displayWeekMode(index, _currentYear);
 			}
 		}
 

@@ -67,7 +67,7 @@ namespace MyShop.Views.MainView
 				},
 				new Item()
 				{
-					FontIcon = "Gears",
+					FontIcon = "Flag",
 					ItemName = "Categories"
 				},
 				new Item()
@@ -82,7 +82,7 @@ namespace MyShop.Views.MainView
 				},
 				new Item()
 				{
-					FontIcon = "Briefcase",
+					FontIcon = "BarChart",
 					ItemName = "Report"
 				}
 			};
