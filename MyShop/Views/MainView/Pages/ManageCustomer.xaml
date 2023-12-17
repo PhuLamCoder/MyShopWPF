@@ -75,7 +75,7 @@
                 BorderThickness="0.5"
                 BorderBrush="#071952"
                 HorizontalAlignment="Right"
-                Click="AddOrder_Click">
+                Click="AddCustomer_Click">
             <StackPanel Orientation="Horizontal">
                 <fa:ImageAwesome 
                     Width="11"

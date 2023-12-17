@@ -164,24 +164,6 @@ namespace MyShop.Views.MainView.Pages
 			}
 		}
 
-		private void SaveCustomer_Click(object sender, RoutedEventArgs e)
-		{
-			/*
-			var customerDTO = new CustomerDTO();
-
-			int CusID;
-
-
-			customerDTO.CusName = CustomerTermTextBox.Text;
-			CusID = _customerBUS.addCustomer(customerDTO);
-			customerDTO.CusID = CusID;
-
-			_customers.Add(customerDTO);
-
-			MessageBox.Show("Khách hàng đã thêm thành công", "Thông báo", MessageBoxButton.OK);
-			*/
-		}
-
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
 			var result = MessageBox.Show("Bạn có muốn xóa không?", "Thông Báo", 
@@ -213,5 +195,10 @@ namespace MyShop.Views.MainView.Pages
 			if (index != -1)
 				_currentProduct.copy(_products[index]);
 		}
-	}
+
+		private void AddCustomer_Click(object sender, RoutedEventArgs e)
+		{
+			_pageNavigation.NavigationService.Navigate(new AddCustomer(_pageNavigation));
+		}
+    }
 }

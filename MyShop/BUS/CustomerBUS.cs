@@ -50,5 +50,11 @@ namespace MyShop.BUS
 
 			return result;
 		}
+
+		public int saveCustomer(CustomerDTO customer)
+		{
+			int id = _customerDAO.insertCustomer(customer);
+			return id;
+		}
 	}
 }

@@ -12,15 +12,10 @@ namespace MyShop.Views.MainView.Pages
 	/// </summary>
 	public partial class AddProduct : Page
 	{
-		private bool _isImageChanged = false;
 		private FileInfo? _selectedImage = null;
 		private ProductBUS _productBUS;
 		private CategoryBUS _categoryBUS;
 		private Frame _pageNavigation;
-		class AddProductResources
-		{
-			public string ProImage { get; set; }
-		}
 
 		public AddProduct(Frame pageNavigation)
 		{
@@ -35,11 +30,6 @@ namespace MyShop.Views.MainView.Pages
 			CategoryCombobox.ItemsSource = categories;
 			CategoryCombobox.SelectedIndex = 0;
 
-			DataContext = new AddProductResources()
-			{
-				ProImage = "Assets/Images/add_image.png"
-			};
-
 			_pageNavigation = pageNavigation;
 		}
 
@@ -49,7 +39,6 @@ namespace MyShop.Views.MainView.Pages
 			screen.Filter = "Files|*.png; *.jpg; *.jpeg;";
 			if (screen.ShowDialog() == true)
 			{
-				_isImageChanged = true;
 				_selectedImage = new FileInfo(screen.FileName);
 
 				var bitmap = new BitmapImage();

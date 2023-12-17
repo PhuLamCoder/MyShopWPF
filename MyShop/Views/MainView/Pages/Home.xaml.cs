@@ -1,7 +1,6 @@
 ﻿using Microsoft.Win32;
 using MyShop.BUS;
 using MyShop.DTO;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

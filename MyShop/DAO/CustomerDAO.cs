@@ -13,7 +13,7 @@ namespace MyShop.DAO
 		{
 			ObservableCollection<CustomerDTO> list = new ObservableCollection<CustomerDTO>();
 
-			string sql = "SELECT * FROM customer";
+			string sql = "SELECT * FROM customer WHERE Block = 0";
 			var command = new SqlCommand(sql, db.connection);
 
 			var reader = command.ExecuteReader();
@@ -27,6 +27,7 @@ namespace MyShop.DAO
 				customer.DOB = (DateTime)reader["DOB"];
 				customer.Address = (string)reader["Address"];
 				customer.Tel = (string)reader["Tel"];
+				customer.Block = (int)reader["Block"];
 				list.Add(customer);
 			}
 			reader.Close();
@@ -54,6 +55,7 @@ namespace MyShop.DAO
 				customer.DOB = (DateTime)reader["DOB"];
 				customer.Address = (string)reader["Address"];
 				customer.Tel = (string)reader["Tel"];
+				customer.Block = (int)reader["Block"];
 				list.Add(customer);
 			}
 
@@ -61,6 +63,27 @@ namespace MyShop.DAO
 			result = list[0];
 
 			return result;
+		}
+
+		public int insertCustomer(CustomerDTO customerDTO)
+		{
+			string query = """
+				INSERT INTO customer(CusName, Gender, DOB, Address, Tel, Block)
+				VALUES(@CusName, @Gender, @DOB, @Address, @Tel, @Block);
+				SELECT ident_current('customer')
+				""";
+			var command = new SqlCommand(query, db.connection);
+
+			command.Parameters.Add("@CusName", SqlDbType.NVarChar).Value = customerDTO.CusName;
+			command.Parameters.Add("@Gender", SqlDbType.NVarChar).Value = customerDTO.Gender;
+			command.Parameters.Add("@DOB", SqlDbType.Date).Value = customerDTO.DOB;
+			command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customerDTO.Address;
+			command.Parameters.Add("@Tel", SqlDbType.NVarChar).Value = customerDTO.Tel;
+			command.Parameters.Add("@Block", SqlDbType.Int).Value = customerDTO.Block;
+
+			int id = (int)((decimal)command.ExecuteScalar());
+
+			return id;
 		}
 	}
 }

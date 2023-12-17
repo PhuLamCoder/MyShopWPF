@@ -10,6 +10,7 @@ namespace MyShop.DTO
 		public DateTime DOB { get; set; }
 		public string Address { get; set; }
 		public string Tel { get; set; }
+		public int Block { get; set; }
 
 		public event PropertyChangedEventHandler? PropertyChanged;
 	}

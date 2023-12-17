@@ -53,9 +53,10 @@ namespace MyShop.Views.MainView.Pages
 		}
 
 
-		private void AddOrder_Click(object sender, RoutedEventArgs e)
+		private void AddCustomer_Click(object sender, RoutedEventArgs e)
 		{
-			_pageNavigation.NavigationService.Navigate(new AddOrder(_pageNavigation));
+			// Chưa thêm cái pagination vào
+			_pageNavigation.NavigationService.Navigate(new AddCustomer(_pageNavigation));
 		}
 
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -97,15 +98,6 @@ namespace MyShop.Views.MainView.Pages
 		{
 			_currentPage = _totalPages;
 			updateDataSource();
-		}
-
-		private void Search_Click(object sender, RoutedEventArgs e)
-		{
-			//_currentPage = 1;
-			//_currentStartDate = StartDate.SelectedDate;
-			//_currentEndDate = EndDate.SelectedDate;
-			//updateDataSource();
-			//updatePagingInfo();
 		}
 
 		private void SearchTermTextBox_KeyDown(object sender, KeyEventArgs e)
