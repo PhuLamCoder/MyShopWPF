@@ -46,22 +46,21 @@ namespace MyShop.Views.MainView.Pages
 			_data = new ObservableCollection<Data>();
 			_purchaseBuffer = new List<PurchaseDTO>();
 
+			// Khởi tạo dữ liệu
+			_products = _productBUS.getAll(sortBy: "name");
+			_currentProduct.copy(_products[0]);
+			_customers = _customerBUS.getAll(sortBy: "name");
+
 			InitializeComponent();
 		}
 
-		private async void Page_Loaded(object sender, RoutedEventArgs e)
+		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
-			_products = await _productBUS.getAll(sortBy: "name");
 			ProductCombobox.ItemsSource = _products;
-			_currentProduct .copy(_products[0]);
 			ProductCombobox.SelectedIndex = 0;
-
-			_customers = _customerBUS.getAll(sortBy: "name");
 			CustomerCombobox.ItemsSource = _customers;
 			CustomerCombobox.SelectedIndex = 0;
-
 			FinalPrice.Text = string.Format("{0:N0} đ", _currentTotalPrice);
-
 			ordersListView.ItemsSource = _data;
 			this.DataContext = _currentProduct;
 		}

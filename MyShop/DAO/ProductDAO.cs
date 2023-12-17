@@ -11,7 +11,7 @@ namespace MyShop.DAO
 		DatabaseUtilitites db = DatabaseUtilitites.getInstance();
 		//private ObservableCollection<PromotionDTO> _promotion = (new PromotionDAO()).getAll();
 
-		public async Task<ObservableCollection<ProductDTO>> getAll()
+		public ObservableCollection<ProductDTO> getAll()
 		{
 			ObservableCollection<ProductDTO> list = new ObservableCollection<ProductDTO>();
 

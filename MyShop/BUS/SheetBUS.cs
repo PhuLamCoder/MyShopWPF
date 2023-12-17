@@ -105,6 +105,7 @@ namespace MyShop.BUS
 							{
 								productDTO.Price = Decimal.Parse(cellValue);
 							}
+							productDTO.PromotionPrice = productDTO.Price;
 							columnIndex++;
 						}
 						result.Add(productDTO);

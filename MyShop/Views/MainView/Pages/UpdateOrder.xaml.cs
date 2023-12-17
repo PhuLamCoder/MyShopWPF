@@ -37,19 +37,21 @@ namespace MyShop.Views.MainView.Pages
 			_productBUS = new ProductBUS();
 			_customerBUS = new CustomerBUS();
 			_orderBUS = new ShopOrderBUS();
+
+			// Load dữ liệu
+			_products = _productBUS.getAll(sortBy: "name");
+			_currentProduct.copy(_products[0]);
+			_customers = _customerBUS.getAll(sortBy: "name");
 		}
 
-		private async void Page_Loaded(object sender, RoutedEventArgs e)
+		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			// Hiển thị danh sách sản phẩm
-			_products = await _productBUS.getAll(sortBy: "name");
 			ProductCombobox.ItemsSource = _products;
-			_currentProduct.copy(_products[0]);
 			ProductCombobox.SelectedIndex = 0;
 			DataContext = _currentProduct;
 
 			// Hiển thị danh sách và chọn tên khách hàng
-			_customers = _customerBUS.getAll(sortBy: "name");
 			CustomerCombobox.ItemsSource = _customers;
 			for (int i = 0; i < _customers.Count; i++)
 			{

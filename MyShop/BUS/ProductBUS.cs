@@ -15,9 +15,9 @@ namespace MyShop.BUS
 			_productDAO = new ProductDAO();
 		}
 
-		public async Task<ObservableCollection<ProductDTO>> getAll(string? sortBy = null) 
+		public ObservableCollection<ProductDTO> getAll(string? sortBy = null) 
 		{
-			var result = await _productDAO.getAll();
+			var result = _productDAO.getAll();
 			if (sortBy != null)
 			{
 				if (sortBy.ToLower() == "name")
@@ -43,7 +43,7 @@ namespace MyShop.BUS
 		public async Task<Tuple<List<ProductDTO>, int>> findProductBySearch(int currentPage = 1, int productsPerPage = 9,
 				string keyword = "", Decimal? startPrice = null, Decimal? endPrice = null, string? orderBy = null, bool asc = true)
 		{
-			var origin = await _productDAO.getAll();
+			var origin = _productDAO.getAll();
 			var sortedList = origin.ToList<ProductDTO>();
 
 			if (orderBy != null)

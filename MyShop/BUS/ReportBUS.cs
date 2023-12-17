@@ -1,23 +1,43 @@
 ﻿using MyShop.DAO;
 using MyShop.DTO;
+using System.ComponentModel;
 
 namespace MyShop.BUS
 {
 	public class ReportBUS
 	{
 		private List<ShopOrderDTO> _orders;
+		private List<ProductDTO> _products;
+
 		private ShopOrderDAO _orderDAO;
+		private ProductDAO _productDAO;
+
+		private int topN = 5;
 
 		public ReportBUS()
 		{
 			_orderDAO = new ShopOrderDAO();
+			_productDAO = new ProductDAO();
 			_orders = getAllShopOrders();
+			_products = getAllProducts();
 		}
 
 		private List<ShopOrderDTO> getAllShopOrders()
 		{
 			var orders = _orderDAO.getAll();
 			return orders.ToList();
+		}
+
+		private List<ProductDTO> getAllProducts()
+		{
+			var products = _productDAO.getAll();
+			return products.ToList();
+		}
+
+		public class ProductSales
+		{
+			public ProductDTO Product { get; set; }
+			public int Quantity { get; set; }
 		}
 
 		// START: phương thức thống kê doanh thu, lợi nhuận
@@ -240,6 +260,84 @@ namespace MyShop.BUS
 			return result;
 		}
 		// END: phương thức thống kê số lượng sản phẩm đã bán
+
+		// START: phương thức thống kê sản phẩm bán chạy
+		public List<ProductSales> groupTopSalesByYear(int year)
+		{
+			List<ProductSales> result = new List<ProductSales>();
+
+			foreach (var product in _products)
+			{
+				result.Add(new ProductSales { Product = product, Quantity = 0 });
+			}
+
+
+			foreach (var order in _orders)
+			{
+				if (order.CreateAt.Year == year)
+				{
+					var purchases = _orderDAO.getPurchases(order.OrderID);
+					foreach (var purchase in purchases)
+					{
+						result.Find(item => item.Product.ProId == purchase.ProID)!.Quantity += purchase.Quantity;
+					}
+				}
+			}
+			return result.OrderByDescending(item => item.Quantity).Take(topN).ToList();
+		}
+
+		public List<ProductSales> groupTopSalesByMonth(int year, int month)
+		{
+			List<ProductSales> result = new List<ProductSales>();
+
+			foreach (var product in _products)
+			{
+				result.Add(new ProductSales { Product = product, Quantity = 0 });
+			}
+
+			foreach (var order in _orders)
+			{
+				if (order.CreateAt.Year == year && order.CreateAt.Month == month)
+				{
+					var purchases = _orderDAO.getPurchases(order.OrderID);
+					foreach (var purchase in purchases)
+					{
+						result.Find(item => item.Product.ProId == purchase.ProID)!.Quantity += purchase.Quantity;
+					}
+				}
+			}
+			return result.OrderByDescending(item => item.Quantity).Take(topN).ToList();
+		}
+
+		public List<ProductSales> groupTopSalesByCurrentWeek()
+		{
+			List<ProductSales> result = new List<ProductSales>();
+
+			foreach (var product in _products)
+			{
+				result.Add(new ProductSales { Product = product, Quantity = 0 });
+			}
+
+			DateTime today = DateTime.Today;
+			int daysUntilMonday = ((int)today.DayOfWeek - (int)DayOfWeek.Monday + 7) % 7;
+
+			DateTime startOfWeek = today.AddDays(-daysUntilMonday);
+			DateTime endOfWeek = startOfWeek.AddDays(6); // 6 ngày sau để đến Chủ nhật
+
+			foreach (var order in _orders)
+			{
+				if (order.CreateAt.Date >= startOfWeek && order.CreateAt.Date <= endOfWeek)
+				{
+					var purchases = _orderDAO.getPurchases(order.OrderID);
+					foreach (var purchase in purchases)
+					{
+						result.Find(item => item.Product.ProId == purchase.ProID)!.Quantity += purchase.Quantity;
+					}
+				}
+			}
+			return result.OrderByDescending(item => item.Quantity).Take(topN).ToList();
+		}
+		// END: phương thức thống kê sản phẩm bán chạy
 
 
 		public List<string> EachDayConverter(DateTime startDate, DateTime endDate)

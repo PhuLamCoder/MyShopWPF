@@ -107,7 +107,7 @@ namespace MyShop.Views.MainView
 		{
 			if (selectedIndex == Page.DashBoard)
 			{
-				pageNavigation.NavigationService.Navigate(new DashBoard());
+				pageNavigation.NavigationService.Navigate(new DashBoard(pageNavigation));
 			}
 			else if (selectedIndex == Page.Home)
 			{

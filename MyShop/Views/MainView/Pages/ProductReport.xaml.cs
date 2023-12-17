@@ -57,7 +57,7 @@ namespace MyShop.Views.MainView.Pages
 			});
 			Title.Text = "Đang hiển thị chế độ xem theo năm";
 
-			ObservableCollection<ProductDTO> products = await _productBUS.getAll();
+			ObservableCollection<ProductDTO> products = _productBUS.getAll();
 
 			ProductsCombobox.ItemsSource = products;
 			ProductsCombobox.SelectedIndex = 0;
