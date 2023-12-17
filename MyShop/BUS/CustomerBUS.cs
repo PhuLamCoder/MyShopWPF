@@ -56,5 +56,15 @@ namespace MyShop.BUS
 			int id = _customerDAO.insertCustomer(customer);
 			return id;
 		}
+
+		public void delCustomerById(int id)
+		{
+			_customerDAO.deleteCustomerById(id);
+		}
+
+		public void updateCustomer(CustomerDTO customer)
+		{
+			_customerDAO.updateCustomer(customer);
+		}
 	}
 }

@@ -85,5 +85,41 @@ namespace MyShop.DAO
 
 			return id;
 		}
+
+		// Soft delete
+		public void deleteCustomerById(int CusId)
+		{
+			string sql = $"""
+                UPDATE customer 
+                SET Block = {1}
+                WHERE CusID = {CusId}
+                """;
+
+			var command = new SqlCommand(sql, db.connection);
+			command.ExecuteNonQuery();
+		}
+
+		public void updateCustomer(CustomerDTO customer)
+		{
+			string query = """
+				UPDATE customer
+				SET CusName = @CusName, 
+					Gender = @Gender,
+					DOB = @DOB,
+					Address = @Address,
+					Tel = @Tel
+				WHERE CusID = @CusID
+				""";
+			var command = new SqlCommand(query, db.connection);
+
+			command.Parameters.Add("@CusID", SqlDbType.Int).Value = customer.CusID;
+			command.Parameters.Add("@CusName", SqlDbType.NVarChar).Value = customer.CusName;
+			command.Parameters.Add("@Gender", SqlDbType.NVarChar).Value = customer.Gender;
+			command.Parameters.Add("@DOB", SqlDbType.Date).Value = customer.DOB;
+			command.Parameters.Add("@Address", SqlDbType.NVarChar).Value = customer.Address;
+			command.Parameters.Add("@Tel", SqlDbType.NVarChar).Value = customer.Tel;
+
+			command.ExecuteNonQuery();
+		}
 	}
 }

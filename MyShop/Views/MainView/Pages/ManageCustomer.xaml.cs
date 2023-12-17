@@ -66,7 +66,7 @@ namespace MyShop.Views.MainView.Pages
 
 			if (customer != null)
 			{
-				//_pageNavigation.NavigationService.Navigate(new OrderDetail(order, _pageNavigation));
+				_pageNavigation.NavigationService.Navigate(new UpdateCustomer(customer, _pageNavigation));
 			}
 		}
 
