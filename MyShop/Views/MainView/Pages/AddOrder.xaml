@@ -226,7 +226,7 @@
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock>
-                                    <Run Text="{Binding CusName, Mode=OneWay}"/>
+                                    <Run Text="{Binding CusName, Mode=OneWay}"/> - SĐT: <Run Text="{Binding Tel, Mode=OneWay}"/>
                                 </TextBlock>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>

@@ -14,15 +14,6 @@ namespace MyShop.Views.MainView.Pages
 	/// </summary>
 	public partial class Home : Page
 	{
-		class Resources
-		{
-			public string FirstIcon { get; set; }
-			public string LastIcon { get; set; }
-			public string NextIcon { get; set; }
-			public string PrevIcon { get; set; }
-			public int ProductListWidth { get; set; }
-		}
-
 		// Mục đích là đổ dữ liệu của Class này lên UI
 		class Data
 		{
@@ -64,14 +55,6 @@ namespace MyShop.Views.MainView.Pages
 		private void Page_Loaded(object sender, RoutedEventArgs e)
 		{
 			updateDataSource();
-
-			this.DataContext = new Resources()
-			{
-				FirstIcon = "Assets/Images/ic-first.png",
-				LastIcon = "Assets/Images/ic-last.png",
-				NextIcon = "Assets/Images/ic-next.png",
-				PrevIcon = "Assets/Images/ic-prev.png",
-			};
 		}
 
 		private async void updateDataSource()
@@ -125,8 +108,7 @@ namespace MyShop.Views.MainView.Pages
 		{
 			if (e.Key == Key.Enter)
 			{
-				string keyword = SearchTermTextBox.Text.Trim();
-				_currentKey = keyword;
+				_currentKey = SearchTermTextBox.Text.Trim();
 				_currentPage = 1;
 				updateDataSource();
 			}

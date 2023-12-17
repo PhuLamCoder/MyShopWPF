@@ -30,5 +30,25 @@ namespace MyShop.BUS
 		{
 			return _customerDAO.getCustomerById(cusID);
 		}
+
+		public Tuple<ObservableCollection<CustomerDTO>, int> findCustomerBySearch(int currentPage = 1, int rowsPerPage = 8,
+			 string? keyword = null)
+		{
+			var origin = _customerDAO.getAll();
+
+			var list = origin.Where((item) => {
+				bool check = true;
+				if (keyword != null)
+				{
+					check = item.CusName.ToLower().Contains(keyword.ToLower()) || item.Tel.ToLower().Contains(keyword.ToLower());
+				}
+				return check;
+			});
+
+			var items = list.Skip((currentPage - 1) * rowsPerPage).Take(rowsPerPage);
+			var result = new Tuple<ObservableCollection<CustomerDTO>, int>(new ObservableCollection<CustomerDTO>(items), list.Count());
+
+			return result;
+		}
 	}
 }

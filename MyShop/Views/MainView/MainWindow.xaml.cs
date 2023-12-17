@@ -24,6 +24,7 @@ namespace MyShop.Views.MainView
 			Home,
 			Category,
 			Promotion,
+			Customer,
 			Order,
 			Report
 		}
@@ -66,6 +67,11 @@ namespace MyShop.Views.MainView
 				{
 					FontIcon = "Tags",
 					ItemName = "Promotions"
+				},
+				new Item()
+				{
+					FontIcon = "User",
+					ItemName = "Customers"
 				},
 				new Item()
 				{
@@ -114,6 +120,10 @@ namespace MyShop.Views.MainView
 			else if (selectedIndex == Page.Promotion)
 			{
 				pageNavigation.NavigationService.Navigate(new ManagePromotion(pageNavigation));
+			}
+			else if (selectedIndex == Page.Customer)
+			{
+				pageNavigation.NavigationService.Navigate(new ManageCustomer(pageNavigation));
 			}
 			else if (selectedIndex == Page.Order)
 			{

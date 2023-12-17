@@ -7,45 +7,26 @@ using System.Windows.Input;
 
 namespace MyShop.Views.MainView.Pages
 {
-    /// <summary>
-    /// Interaction logic for ManageOrder.xaml
-    /// </summary>
-    public partial class ManageOrder : Page
-    {
+	/// <summary>
+	/// Interaction logic for ManageCustomer.xaml
+	/// </summary>
+	public partial class ManageCustomer : Page
+	{
 		Frame _pageNavigation;
-		private ShopOrderBUS _orderBUS;
+		private CustomerBUS _customerBUS;
 
-		private List<ShopOrderDTO>? _orders = null;
-		private ObservableCollection<Data>? _list = null;
+		private ObservableCollection<CustomerDTO>? _customers = null;
 
 		private int _currentPage = 1;
 		private int _rowsPerPage = 8;
 		private int _totalItems = 0;
 		private int _totalPages = 0;
-		private DateTime? _currentStartDate = null;
-		private DateTime? _currentEndDate = null;
+		private string _currentKey = "";
 
-		public class Data
-		{
-			public int OrderID { get; set; }
-			public DateTime CreateAt { get; set; }
-			public string CusName { get; set; }
-			public string FinalTotal { get; set; }
-
-			public Data(ShopOrderDTO order)
-			{
-				var customerBUS = new CustomerBUS();
-				OrderID = order.OrderID;
-				CreateAt = order.CreateAt.Date;
-				CusName = customerBUS.findCustomerById(order.CusID).CusName;
-				FinalTotal = string.Format("{0:N0} đ", order.FinalTotal);
-			}
-		}
-
-		public ManageOrder(Frame pageNavigation)
+		public ManageCustomer(Frame pageNavigation)
 		{
 			_pageNavigation = pageNavigation;
-			_orderBUS = new ShopOrderBUS();
+			_customerBUS = new CustomerBUS();
 			InitializeComponent();
 		}
 
@@ -56,17 +37,10 @@ namespace MyShop.Views.MainView.Pages
 
 		private void updateDataSource()
 		{
-			_list = new ObservableCollection<Data>();
-			(_orders, _totalItems) = _orderBUS.findOrderBySearch(_currentPage, 
-				_rowsPerPage, _currentStartDate, _currentEndDate);
+			(_customers, _totalItems) = _customerBUS.findCustomerBySearch(_currentPage, _rowsPerPage, _currentKey);
+			customersListView.ItemsSource = _customers;
 
-			foreach (var order in _orders)
-			{
-				_list.Add(new Data(order));
-			}
-			ordersListView.ItemsSource = _list;
-
-			infoTextBlock.Text = $"Đang hiển thị {_orders.Count} trên tổng số {_totalItems} hóa đơn";
+			infoTextBlock.Text = $"Đang hiển thị {_customers.Count} trên tổng số {_totalItems} khách hàng";
 			updatePagingInfo();
 		}
 
@@ -86,12 +60,12 @@ namespace MyShop.Views.MainView.Pages
 
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			int i = ordersListView.SelectedIndex;
-			var order = _orders[i];
+			int i = customersListView.SelectedIndex;
+			var customer = _customers![i];
 
-			if (order != null)
+			if (customer != null)
 			{
-				_pageNavigation.NavigationService.Navigate(new OrderDetail(order, _pageNavigation));
+				//_pageNavigation.NavigationService.Navigate(new OrderDetail(order, _pageNavigation));
 			}
 		}
 
@@ -127,11 +101,21 @@ namespace MyShop.Views.MainView.Pages
 
 		private void Search_Click(object sender, RoutedEventArgs e)
 		{
-			_currentPage = 1;
-			_currentStartDate = StartDate.SelectedDate;
-			_currentEndDate = EndDate.SelectedDate;
-			updateDataSource();
-			updatePagingInfo();
+			//_currentPage = 1;
+			//_currentStartDate = StartDate.SelectedDate;
+			//_currentEndDate = EndDate.SelectedDate;
+			//updateDataSource();
+			//updatePagingInfo();
+		}
+
+		private void SearchTermTextBox_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Enter)
+			{
+				_currentKey = SearchTermTextBox.Text.Trim();
+				_currentPage = 1;
+				updateDataSource();
+			}
 		}
 	}
 }

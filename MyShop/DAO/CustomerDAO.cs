@@ -23,6 +23,10 @@ namespace MyShop.DAO
 				CustomerDTO customer = new CustomerDTO();
 				customer.CusID = (int)reader["CusID"];
 				customer.CusName = (string)reader["CusName"];
+				customer.Gender = (string)reader["Gender"];
+				customer.DOB = (DateTime)reader["DOB"];
+				customer.Address = (string)reader["Address"];
+				customer.Tel = (string)reader["Tel"];
 				list.Add(customer);
 			}
 			reader.Close();
@@ -46,6 +50,10 @@ namespace MyShop.DAO
 				CustomerDTO customer = new CustomerDTO();
 				customer.CusID = (int)reader["CusID"];
 				customer.CusName = (string)reader["CusName"];
+				customer.Gender = (string)reader["Gender"];
+				customer.DOB = (DateTime)reader["DOB"];
+				customer.Address = (string)reader["Address"];
+				customer.Tel = (string)reader["Tel"];
 				list.Add(customer);
 			}
 
