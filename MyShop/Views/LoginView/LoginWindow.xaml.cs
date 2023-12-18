@@ -45,7 +45,7 @@ namespace MyShop.Views.LoginView
 				Trace.WriteLine("Sucess");
 				MainWindow mainPage = new MainWindow();
 				mainPage.Show();
-				this.Close();
+				Close();
 			}
 			else
 			{
@@ -58,7 +58,7 @@ namespace MyShop.Views.LoginView
 		{
 			SignupWindow signUpWindow = new SignupWindow();
 			signUpWindow.Show();
-			this.Close();
+			Close();
 		}
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -67,13 +67,12 @@ namespace MyShop.Views.LoginView
 			{
 				MainWindow mainPage = new MainWindow();
 				mainPage.Show();
-				this.Close();
+				Close();
 			}
 
-			this.DataContext = new Resoures()
+			DataContext = new Resoures()
 			{
 				Logo = "Assets/Images/logo.png",
-				MainBgPath = "Assets/Images/main-bg.png"
 			};
 		}
 	}

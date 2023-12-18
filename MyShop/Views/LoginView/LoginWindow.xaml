@@ -15,29 +15,40 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
+
         <Grid.Background>
-            <ImageBrush ImageSource="{Binding MainBgPath, Converter={StaticResource converter}}"/>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#97FEED" Offset="0.0"/>
+                <GradientStop Color="#35A29F" Offset="0.5"/>
+                <GradientStop Color="#0B666A" Offset="1.0"/>
+            </LinearGradientBrush>
         </Grid.Background>
 
         <StackPanel Margin="0,10,0,37" MaxWidth="400"  HorizontalAlignment="Center" Width="370" >
-            <Image Height="120" Width="140" Source="{Binding Logo, Converter={StaticResource converter}}" />
+            <Border CornerRadius="30"
+                    Width="120" Height="120"
+                    Margin="0,10,0,0">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding Logo, Converter={StaticResource converter}}"
+                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Border.Background>
+            </Border>
             <TextBlock Text="Welcome Back!" FontWeight="Bold" FontSize="25" 
                        Margin="0 20 0 5" HorizontalAlignment="Center" Foreground="White"/>
             <TextBlock Text="Log in to your existing account" FontWeight="Normal" FontSize="15" 
                        HorizontalAlignment="Center" Foreground="White"/>
 
-            <TextBlock x:Name="txtFailLogin" FontWeight="Medium" FontSize="15"  Margin="0 10 10 10"
-                       HorizontalAlignment="Center" Foreground="Red"/>
+            <TextBlock x:Name="txtFailLogin" FontWeight="Medium" FontSize="15"  Margin="0,10,10,10"
+                       HorizontalAlignment="Center" Foreground="DarkRed"/>
 
-            <TextBlock Text="Username:" FontWeight="Bold" Margin="0 10 0 5" Foreground="White"/>
+            <TextBlock Text="Username:" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
 
-            <Border BorderThickness="0.5" BorderBrush="Orange" CornerRadius="18"
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
                     Grid.Column="1" Background="White" 
                     HorizontalAlignment="Left"
                     Height="35"
                     Width="370"
-                    Margin="0 0 0 20"
-            >
+                    Margin="0 0 0 20">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
@@ -49,27 +60,24 @@
                         Height="20"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Icon="User"
-                        Foreground="#8B4000"
+                        Foreground="#071952"
                     />
                     <Grid 
                         Grid.Column="1"
                         Width="300"
                         Margin="0"
-                        HorizontalAlignment="Left"
-                    >
+                        HorizontalAlignment="Left">
                         <TextBox 
                             BorderThickness="0"
                             VerticalContentAlignment="Center"
-                            FontSize="13"
-                            x:Name="txtUsername"
-                        />
+                            FontSize="13" Margin="0,1,0,1"
+                            x:Name="txtUsername"/>
                         <TextBlock 
-                            IsHitTestVisible="False" Text="Nhập tài khoản..." 
-                            VerticalAlignment="Center"
-                            FontSize="13"
-                            HorizontalAlignment="Left" Margin="5,0,0,0"
-                            Foreground="DarkGray"
-                        >
+                                IsHitTestVisible="False" Text="Nhập tài khoản..." 
+                                VerticalAlignment="Center"
+                                FontSize="13"
+                                HorizontalAlignment="Left" Margin="5,0,0,0"
+                                Foreground="DarkGray">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -85,18 +93,14 @@
                 </Grid>
             </Border>
 
-            <TextBlock Text="Password:" FontWeight="Bold" Margin="0 0 0 5" Foreground="White">
-
-            </TextBlock>
+            <TextBlock Text="Password:" FontWeight="Bold" Margin="0,0,0,5" Foreground="White"/>
 
             <Border 
-                BorderThickness="0.5" BorderBrush="Orange" CornerRadius="18"
-                Grid.Column="1" Background="White" 
-                HorizontalAlignment="Left"
-                Height="35"
-                Width="370"
-                Margin="0 0 0 20"
-            >
+                    BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0 0 0 20">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
@@ -104,30 +108,23 @@
                     </Grid.ColumnDefinitions>
                     <fa:ImageAwesome 
                         Name="PasswordIcon"
-                        Width="20"
-                        Height="20"
+                        Width="20" Height="20"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Icon="Lock"
-                        Foreground="#8B4000"
-                    />
-                    <Grid 
-                        Grid.Column="1"
-                        Width="300"
-                        Margin="0"
-                        HorizontalAlignment="Left"
-                    >
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1"
+                          Width="300" Margin="0"
+                          HorizontalAlignment="Left">
                         <PasswordBox 
                             BorderThickness="0"
                             VerticalContentAlignment="Center"
-                            FontSize="13"
-                            x:Name="txtPassword"
-                        />
-                        <TextBlock 
-                            IsHitTestVisible="False" Text="Nhập mật khẩu..." 
-                            VerticalAlignment="Center"
-                            FontSize="13"
-                            HorizontalAlignment="Left" Margin="5,0,0,0"
-                            Foreground="DarkGray">
+                            FontSize="13" Margin="0,1,0,1"
+                            x:Name="txtPassword"/>
+                        <TextBlock IsHitTestVisible="False" Text="Nhập mật khẩu..." 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,0,0,0"
+                                   Foreground="DarkGray">
                             <TextBlock.Style>
                                 <Style TargetType="{x:Type TextBlock}">
                                     <Setter Property="Visibility" Value="Collapsed"/>
@@ -143,22 +140,22 @@
                 </Grid>
             </Border>
 
-            <CheckBox Name="RememberMeCheckBox" Content="Remember Me" Foreground="white" />
+            <CheckBox Name="RememberMeCheckBox" Content="Remember Me" Foreground="white"/>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 20 0 0">
                 <Button
                     Margin="0 0 10 0" Width="163" Height="30"
                     Style="{StaticResource MyButtonStyle}"
                     BorderThickness="0.5"
-                    Background="White" BorderBrush="Orange"
-                    FontWeight="Medium" Foreground="#8B4000"
+                    Background="White" BorderBrush="#071952"
+                    FontWeight="Medium" Foreground="#071952"
                     Click="Button_Login"
                 >Login</Button>
                 <Button
                     Margin="10 0 0 0" Width="168" Height="30"
                     Style="{StaticResource MyButtonStyle}"
                     BorderThickness="0.5"
-                    BorderBrush="Orange" Background="White" FontWeight="Medium" Foreground="#8B4000"
+                    BorderBrush="#071952" Background="White" FontWeight="Medium" Foreground="#071952"
                     Click="Button_Signup"
                 >Sign up</Button>
             </StackPanel>

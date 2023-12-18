@@ -264,20 +264,24 @@
                 Foreground="#071952"/>
         </Button>
 
-        <Button Name="Option" Grid.Row="2" Grid.Column="1"
-                Margin="0,0,250,0"
-                Width="28" Height="28"
-                Style="{StaticResource MyButtonStyle}"
-                BorderThickness="0.5" BorderBrush="#071952"
-                HorizontalAlignment="Right"
-                Click="Option_Click">
-            <fa:ImageAwesome 
-                Width="14"
-                Height="14"
-                RenderOptions.BitmapScalingMode="HighQuality"
-                Icon="Exchange"
-                Foreground="#071952"/>
-        </Button>
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,0,250,0">
+            <TextBlock Text="Số lượng hiển thị: " VerticalAlignment="Center"
+                       Foreground="#071952" FontWeight="Medium"/>
+            <Border Height="35" Width="70" Margin="10,0,0,0"
+                    BorderThickness="0.5" BorderBrush="#071952" 
+                    CornerRadius="18" Background="WhiteSmoke">
+                <ComboBox Name="ItemsPerPage"
+                          Margin="0,1,0,1"
+                          BorderThickness="0" BorderBrush="Transparent" Width="40"
+                          VerticalContentAlignment="Center"
+                          SelectionChanged="ItemsPerPage_SelectionChanged">
+                    <ComboBoxItem>3</ComboBoxItem>
+                    <ComboBoxItem>6</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">9</ComboBoxItem>
+                </ComboBox>
+            </Border>
+        </StackPanel>
 
         <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="15"
                 Grid.Row="2" Grid.Column="1"

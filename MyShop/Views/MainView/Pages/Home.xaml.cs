@@ -263,21 +263,24 @@ namespace MyShop.Views.MainView.Pages
 			}
 		}
 
-		bool flag = false;
-		private void Option_Click(object sender, RoutedEventArgs e)
+		private void ItemsPerPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			if (flag == false)
+			if (pageInfoTextBlock != null)
 			{
-				_rowsPerPage = 6;
+				if (ItemsPerPage.SelectedIndex == 0)
+				{
+					_rowsPerPage = 3;
+				}
+				else if (ItemsPerPage.SelectedIndex == 1)
+				{
+					_rowsPerPage = 6;
+				}
+				else if (ItemsPerPage.SelectedIndex == 2)
+				{
+					_rowsPerPage = 9;
+				}
+				updateDataSource();
 			}
-			if (flag == true)
-			{
-				_rowsPerPage = 9;
-			}
-
-			updateDataSource();
-			//updatePagingInfo();
-			flag = !flag;
 		}
 	}
 }

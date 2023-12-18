@@ -46,6 +46,8 @@ namespace MyShop.BUS
 
 					IEnumerable<Row> rows = worksheetPart.Worksheet.Descendants<Row>();
 
+					// Bỏ dòng tiêu đề
+					rows = rows.Skip(1);
 					foreach (Row row in rows)
 					{
 						int columnIndex = 0;

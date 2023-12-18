@@ -3,7 +3,6 @@ using Microsoft.Data.SqlClient;
 
 namespace MyShop.DAO
 {
-	// TODO: bắt lỗi exception khi không kết nối DB được => Xử lý App như thế nào?
 	class DatabaseUtilitites
 	{
 		private string _server;
@@ -25,42 +24,11 @@ namespace MyShop.DAO
 
 		public DatabaseUtilitites()
 		{
-			//_server = "sqlexpress";
-			//_databaseName = "MyShop";
-			//_user = "admin";
-			//_password = "admin";
-			//_connection = null;
-
-			// Test
-			_server = "NONAME";
-			_databaseName = "MyShopDB";
-			_user = "sa";
-			_password = "200303";
-
-			string connectionString = $""""
-				Server = {_server}; 
-				User ID = {_user}; 
-				Password={_password}; 
-				Database = {_databaseName}; 
-				TrustServerCertificate=True;
-				Connect Timeout=5
-				"""";
-
-			_connection = new SqlConnection(connectionString);
-
-			try
-			{
-				_connection.Open();
-				isSelectedDatabase = true;
-			}
-			catch (Exception ex)
-			{
-				MessageBox.Show($"Failed to connect to database! Reason: {ex.Message}",
-					"Error", MessageBoxButton.OK, MessageBoxImage.Error);
-			}
-
-			_instance = this;
-			// End test
+			_server = "sqlexpress";
+			_databaseName = "MyShop";
+			_user = "admin";
+			_password = "admin";
+			_connection = null;
 		}
 
 		public DatabaseUtilitites(string server, string databaseName, string user, string password)

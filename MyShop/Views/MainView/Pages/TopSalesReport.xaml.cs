@@ -52,8 +52,7 @@ namespace MyShop.Views.MainView.Pages
 
 		private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			// TODO
-			MessageBox.Show(((ReportBUS.ProductSales)productsListView.SelectedItem).Quantity.ToString());
+			
 		}
 
 		private void GoBack_Click(object sender, RoutedEventArgs e)

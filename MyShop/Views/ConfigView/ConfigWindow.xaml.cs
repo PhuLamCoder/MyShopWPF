@@ -9,11 +9,6 @@ namespace MyShop.Views.ConfigView
 	/// </summary>
 	public partial class ConfigWindow : Window
 	{
-		class Resoures
-		{
-			public string Logo { get; set; }
-			public string MainBgPath { get; set; }
-		}
 		public ConfigWindow()
 		{
 			InitializeComponent();
@@ -21,11 +16,7 @@ namespace MyShop.Views.ConfigView
 
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			this.DataContext = new Resoures()
-			{
-				Logo = "Assets/Images/logo.png",
-				MainBgPath = "Assets/Images/main-bg.png"
-			};
+
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)

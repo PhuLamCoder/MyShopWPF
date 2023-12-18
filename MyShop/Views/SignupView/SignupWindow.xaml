@@ -3,10 +3,275 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyShop.Views.SignupView"
-        mc:Ignorable="d"
-        Title="SignupWindow" Height="450" Width="800">
+        xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        xmlns:local="clr-namespace:MyShop.Views.Converters"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="SignupWindow" Height="660" Width="500" Loaded="Window_Loaded">
+    <Window.Resources>
+        <local:RelativeToAbsoluteConverter x:Key="converter"/>
+    </Window.Resources>
+    
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#97FEED" Offset="0.0"/>
+                <GradientStop Color="#35A29F" Offset="0.5"/>
+                <GradientStop Color="#0B666A" Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+
+        <StackPanel Margin="50,0,50,22"  MaxWidth="400" HorizontalAlignment="Center">
+            <Border CornerRadius="30"
+                    Width="120" Height="120"
+                    Margin="0,10,0,0">
+                <Border.Background>
+                    <ImageBrush ImageSource="{Binding Logo, Converter={StaticResource converter}}"
+                        RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Border.Background>
+            </Border>
+            <TextBlock Text="Sign up" FontWeight="Bold" FontSize="25" Margin="0,10,0,5" HorizontalAlignment="Center" 
+                       Foreground="White"/>
+            <TextBlock Text="To use all features of the application" FontWeight="Normal" FontSize="15" 
+                       HorizontalAlignment="Center" Foreground="White"/>
+            <TextBlock x:Name="txtFailSignUp" FontWeight="Medium" FontSize="15" Margin="0,10,10,10" 
+                       HorizontalAlignment="Center" Foreground="Red"/>
+
+            <TextBlock Text="Fullname:" FontWeight="Bold"  Margin="0,0,0,5" Foreground="White"/>
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome 
+                        Name="fullnameIcon"
+                        Width="20" Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Icon="AddressBook"
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1"
+                          Width="300" Margin="0"
+                          HorizontalAlignment="Left">
+                        <TextBox BorderThickness="0" VerticalContentAlignment="Center"
+                            FontSize="13" x:Name="txtFullname" Margin="0,1,0,1"/>
+                        <TextBlock IsHitTestVisible="False" Text="Địa chỉ" 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,-2,0,-2"
+                                   Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <TextBlock Text="Username:" FontWeight="Bold"  Margin="0,0,0,5" Foreground="White"/>
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome 
+                        Name="usernameIcon"
+                        Width="20" Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Icon="User"
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1"
+                          Width="300"
+                          Margin="0"
+                          HorizontalAlignment="Left">
+                        <TextBox BorderThickness="0" VerticalContentAlignment="Center"
+                            FontSize="13" x:Name="txtUsername" Margin="0,1,0,1"/>
+                        <TextBlock IsHitTestVisible="False" Text="Địa chỉ" 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,0,0,0"
+                                   Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+            
+            <TextBlock Text="Password:" FontWeight="Bold"  Margin="0,0,0,5" Foreground="White"/>
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome 
+                        Name="PasswordIcon"
+                        Width="20" Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Icon="Lock"
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1" Width="300" Margin="0" HorizontalAlignment="Left">
+                        <PasswordBox BorderThickness="0" VerticalContentAlignment="Center"
+                            FontSize="13" x:Name="txtPassword"/>
+                        <TextBlock IsHitTestVisible="False" Text="Nhập mật khẩu..." 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,0,0,0"
+                                   Foreground="Red">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <TextBlock Text="Address:" FontWeight="Bold"  Margin="0 0 0 5" Foreground="White"/>
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome 
+                        Name="addressIcon"
+                        Width="20" Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Icon="Home"
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1" Width="300"
+                          Margin="0" HorizontalAlignment="Left">
+                        <TextBox BorderThickness="0" VerticalContentAlignment="Center"
+                            FontSize="13" x:Name="txtAdress"/>
+                        <TextBlock IsHitTestVisible="False" Text="Địa chỉ" 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,0,0,0"
+                                   Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <TextBlock Text="Numberphone:" FontWeight="Bold"  Margin="0 0 0 5" Foreground="White"/>
+            <Border BorderThickness="0.5" BorderBrush="#071952" CornerRadius="18"
+                    Grid.Column="1" Background="White" 
+                    HorizontalAlignment="Left"
+                    Height="35" Width="370"
+                    Margin="0,0,0,8">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <fa:ImageAwesome 
+                        Name="phoneIcon"
+                        Width="20" Height="20"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Icon="Phone"
+                        Foreground="#071952"/>
+                    <Grid Grid.Column="1"
+                          Width="300" Margin="0"
+                          HorizontalAlignment="Left">
+                        <TextBox BorderThickness="0" VerticalContentAlignment="Center"
+                            FontSize="13" x:Name="txtNumberphone"/>
+                        <TextBlock IsHitTestVisible="False" Text="Số điện thoải" 
+                                   VerticalAlignment="Center"
+                                   FontSize="13"
+                                   HorizontalAlignment="Left" Margin="5,0,0,0"
+                                   Foreground="DarkGray">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=SearchTermTextBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                </Grid>
+            </Border>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0" >
+                <Button Margin="0,0,10,0"
+                        Width="163" Height="30"
+                        Style="{StaticResource MyButtonStyle}"
+                        BorderThickness="0.5"
+                        Background="White"
+                        BorderBrush="#071952"
+                        Name="Button_Signup"
+                        Click="Button_Signup_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Sign up" FontWeight="Medium" Foreground="#071952"/>
+                    </StackPanel>
+                </Button>
+                
+                <Button Margin="10,0,0,0"
+                        Width="163" Height="30"
+                        Style="{StaticResource MyButtonStyle}"
+                        BorderThickness="0.5"
+                        Background="White"
+                        BorderBrush="Gray"
+                        Name="Button_Exit"
+                        Click="Button_Exit_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Exit" FontWeight="Medium" Foreground="Gray"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>
